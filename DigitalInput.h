@@ -1,6 +1,9 @@
 #ifndef DIGITAL_INPUT_H
 #define DIGITAL_INPUT_H
 
+#include <avr/pgmspace.h>
+#include "Pin.h"
+
 namespace Bubble
 {
 	class DigitalInput

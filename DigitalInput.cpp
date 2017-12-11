@@ -14,5 +14,5 @@ DigitalInput::~DigitalInput()
 
 bool DigitalInput::get()
 {
-	
+
 }
