@@ -3,6 +3,14 @@
 
 #include <avr/pgmspace.h>
 
+// External arrays defined in board header
+extern const uint16_t PROGMEM portToModePGM[];
+extern const uint16_t PROGMEM portToInputPGM[];
+extern const uint16_t PROGMEM portToOutputPGM[];
+extern const uint8_t PROGMEM digitalPinToPortPGM[];
+extern const uint8_t PROGMEM digitalPinToBitMaskPGM[];
+extern const uint8_t PROGMEM digitalPinToTimerPGM[];
+
 namespace Phantom
 {
 	class Pin
@@ -22,7 +30,7 @@ namespace Phantom
 	private:
 		uint8_t number;
 		// AVR
-		uint8_t port, bitMask, timer, analogBit, inputRegister, outputRegister, modeRegister;
+		uint8_t port, bitMask, timer, analogBit, modeRegister, inputRegister, outputRegister;
 	};
 }
 
