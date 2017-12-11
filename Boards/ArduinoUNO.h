@@ -3,6 +3,8 @@
 
 #include <avr/pgmspace.h>
 
+#include "BoardBase.h"
+
 #define AVR
 #define 
 
@@ -13,38 +15,23 @@ namespace Phantom
 	const uint8_t PIN_COUNT_DAC = 6;
 
 	// SPI
-	const uint8_t PIN_SPI_SS    = 10;
-	const uint8_t PIN_SPI_MOSI 	= 11;
-	const uint8_t PIN_SPI_MISO 	= 12;
-	const uint8_t PIN_SPI_SCK 	= 13;
-	static const uint8_t SS   	= PIN_SPI_SS;
-	static const uint8_t MOSI 	= PIN_SPI_MOSI;
-	static const uint8_t MISO 	= PIN_SPI_MISO;
-	static const uint8_t SCK 	= PIN_SPI_SCK;
+	const uint8_t SPI_SS    = 10;
+	const uint8_t SPI_MOSI 	= 11;
+	const uint8_t SPI_MISO 	= 12;
+	const uint8_t SPI_SCK 	= 13;
 
 	// I2C (Wire)
-	const uint8_t PIN_I2C_SDA = 18;
-	const uint8_t PIN_I2C_SCL = 19;
-	static const uint8_t SDA = PIN_I2C_SDA;
-	static const uint8_t SCL = PIN_I2C_SCL;
-
+	const uint8_t I2C_SDA = 18;
+	const uint8_t I2C_SCL = 19;
 	// Analog
-	const uint8_t PIN_A0 = 14;
-	const uint8_t PIN_A1 = 15;
-	const uint8_t PIN_A2 = 16;
-	const uint8_t PIN_A3 = 17;
-	const uint8_t PIN_A4 = 18;
-	const uint8_t PIN_A5 = 19;
-	const uint8_t PIN_A6 = 20;
-	const uint8_t PIN_A7 = 21;
-	static const uint8_t A0 = PIN_A0;
-	static const uint8_t A1 = PIN_A1;
-	static const uint8_t A2 = PIN_A2;
-	static const uint8_t A3 = PIN_A3;
-	static const uint8_t A4 = PIN_A4;
-	static const uint8_t A5 = PIN_A5;
-	static const uint8_t A6 = PIN_A6;
-	static const uint8_t A7 = PIN_A7;
+	const uint8_t A0 = 14;
+	const uint8_t A1 = 15;
+	const uint8_t A2 = 16;
+	const uint8_t A3 = 17;
+	const uint8_t A4 = 18;
+	const uint8_t A5 = 19;
+	const uint8_t A6 = 20;
+	const uint8_t A7 = 21;
 
 	// PWM
 
