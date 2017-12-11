@@ -4,7 +4,7 @@
 #include <avr/pgmspace.h>
 #include "Pin.h"
 
-namespace Bubble
+namespace Phantom
 {
 	class DigitalInput
 	{

@@ -3,7 +3,7 @@
 
 #include <avr/pgmspace.h>
 
-namespace Bubble
+namespace Phantom
 {
 	class Pin
 	{

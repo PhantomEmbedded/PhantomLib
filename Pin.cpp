@@ -1,6 +1,6 @@
 #include "Pin.h"
 
-using namespace Bubble;
+using namespace Phantom;
 
 Pin::Pin(uint8_t number): number(number)
 {

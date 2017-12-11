@@ -1,6 +1,6 @@
 #include "DigitalInput.h"
 
-using namespace Bubble;
+using namespace Phantom;
 
 DigitalInput::DigitalInput(Pin &pin): pin(pin)
 {
