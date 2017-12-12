@@ -38,5 +38,6 @@ DigitalInput::~DigitalInput()
 
 bool DigitalInput::get()
 {
-
+	if (pin.getPort() == NOT_A_PIN) return LOW;
+	return (*pin.getInputRegister() & pin.getBitMask());
 }
