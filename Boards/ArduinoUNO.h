@@ -5,9 +5,6 @@
 
 #include "BoardBase.h"
 
-#define AVR
-#define 
-
 namespace Phantom
 {
 	const uint8_t PIN_COUNT = 20;
@@ -40,7 +37,7 @@ namespace Phantom
 		switch (pin)
 		{
 			default: return false; break;
-			#ifndef (__AVR_ATmega8__)
+			#ifndef __AVR_ATmega8__
 			case 3:
 			case 5:
 			case 6:
@@ -53,7 +50,7 @@ namespace Phantom
 	}
 
 	// PCICR
-	uint8_t digitalPinToPCICR(uint8_t pin)
+	volatile uint8_t* digitalPinToPCICR(uint8_t pin)
 	{
 		return ((pin) >= 0 && (pin) <= 21) ? (&PCICR) : ((uint8_t *)0);
 	}
@@ -64,20 +61,20 @@ namespace Phantom
 	}
 
 	// PCMSK
-	uint8_t digitalPinToPCMSK(uint8_t pin)
+	volatile uint8_t*  digitalPinToPCMSK(uint8_t pin)
 	{
 		return ((pin) <= 7) ? (&PCMSK2) : (((pin) <= 13) ? (&PCMSK0) : (((pin) <= 21) ? (&PCMSK1) : ((uint8_t *)0)));
 	}
 
 	uint8_t digitalPinToPCMSKbit(uint8_t pin)
 	{
-		return ((p) <= 7) ? (p) : (((p) <= 13) ? ((p) - 8) : ((p) - 14));
+		return ((pin) <= 7) ? (pin) : (((pin) <= 13) ? ((pin) - 8) : ((pin) - 14));
 	}
 
 	// Interrupt
 	uint8_t digitalPinToInterrupt(uint8_t pin)
 	{
-		return (p) == 2 ? 0 : ((p) == 3 ? 1 : NOT_AN_INTERRUPT);
+		return (pin) == 2 ? 0 : ((pin) == 3 ? 1 : NOT_AN_INTERRUPT);
 	}
 
 	// Port Mapping
