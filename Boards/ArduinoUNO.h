@@ -50,29 +50,29 @@ namespace Phantom
 	}
 
 	// PCICR
-	volatile uint8_t* digitalPinToPCICR(uint8_t pin)
+	inline volatile uint8_t* digitalPinToPCICR(uint8_t pin)
 	{
 		return ((pin) >= 0 && (pin) <= 21) ? (&PCICR) : ((uint8_t *)0);
 	}
 
-	uint8_t digitalPinToPCICRbit(uint8_t pin)
+	inline uint8_t digitalPinToPCICRbit(uint8_t pin)
 	{
 		return ((pin) <= 7) ? 2 : (((pin) <= 13) ? 0 : 1);
 	}
 
 	// PCMSK
-	volatile uint8_t*  digitalPinToPCMSK(uint8_t pin)
+	inline volatile uint8_t*  digitalPinToPCMSK(uint8_t pin)
 	{
 		return ((pin) <= 7) ? (&PCMSK2) : (((pin) <= 13) ? (&PCMSK0) : (((pin) <= 21) ? (&PCMSK1) : ((uint8_t *)0)));
 	}
 
-	uint8_t digitalPinToPCMSKbit(uint8_t pin)
+	inline uint8_t digitalPinToPCMSKbit(uint8_t pin)
 	{
 		return ((pin) <= 7) ? (pin) : (((pin) <= 13) ? ((pin) - 8) : ((pin) - 14));
 	}
 
 	// Interrupt
-	uint8_t digitalPinToInterrupt(uint8_t pin)
+	inline uint8_t digitalPinToInterrupt(uint8_t pin)
 	{
 		return (pin) == 2 ? 0 : ((pin) == 3 ? 1 : NOT_AN_INTERRUPT);
 	}
