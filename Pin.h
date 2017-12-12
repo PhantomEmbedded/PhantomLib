@@ -1,6 +1,10 @@
 #ifndef PIN_H
 #define PIN_H
 
+#ifndef BOARD_BASE
+#error Please include a board type (e.g. #include <Boards/ArduinoUNO.h>)
+#endif
+
 #include <avr/pgmspace.h>
 
 // External arrays defined in board header
@@ -24,14 +28,14 @@ namespace Phantom
 		uint8_t getBitMask() {return bitMask;}
 		uint8_t getTimer() {return timer;}
 		uint8_t getAnalogBit() {return analogBit;} // Only for analog pins
-		uint16_t getInputRegister() {return inputRegister;}
-		uint16_t getOutputRegister() {return outputRegister;}
-		uint16_t getModeRegister() {return modeRegister;}
+		volatile uint16_t *getInputRegister() {return inputRegister;}
+		volatile uint16_t *getOutputRegister() {return outputRegister;}
+		volatile uint16_t *getModeRegister() {return modeRegister;}
 	private:
 		uint8_t number;
 		// AVR
 		uint8_t port, bitMask, timer, analogBit;
-		volatile uint16_t modeRegister, inputRegister, outputRegister;
+		volatile uint16_t *modeRegister, *inputRegister, *outputRegister;
 	};
 }
 

@@ -8,9 +8,9 @@ Pin::Pin(uint8_t number): number(number)
 	bitMask			= pgm_read_byte(digitalPinToBitMaskPGM + (number));
 	timer			= pgm_read_byte(digitalPinToTimerPGM + (number));
 	analogBit		= number;
-	modeRegister	= (pgm_read_word(portToModePGM + (port)));
-	inputRegister	= (pgm_read_word(portToOutputPGM + (port)));
-	outputRegister	= (pgm_read_word(portToInputPGM + (port)));
+	modeRegister	= (volatile uint16_t *)(pgm_read_word(portToModePGM + (port)));
+	inputRegister	= (volatile uint16_t *)(pgm_read_word(portToOutputPGM + (port)));
+	outputRegister	= (volatile uint16_t *)(pgm_read_word(portToInputPGM + (port)));
 }
 
 Pin::~Pin()
@@ -18,4 +18,3 @@ Pin::~Pin()
 	
 }
 
-//(volatile uint8_t *)
