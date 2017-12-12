@@ -14,7 +14,12 @@ DigitalOutput::DigitalOutput(Pin &pin): pin(pin)
 
 DigitalOutput::~DigitalOutput()
 {
+	uint8_t bit = pin.getBitMask();
 
+	uint8_t oldSREG = SREG;
+	cli();
+	*pin.getModeRegister() &= ~bit;
+	*pin.getOutputRegister() |= bit;
 }
 
 void DigitalOutput::set(bool state)
