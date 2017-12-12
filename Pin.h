@@ -30,7 +30,8 @@ namespace Phantom
 	private:
 		uint8_t number;
 		// AVR
-		uint8_t port, bitMask, timer, analogBit, modeRegister, inputRegister, outputRegister;
+		uint8_t port, bitMask, timer, analogBit;
+		volatile uint16_t modeRegister, inputRegister, outputRegister;
 	};
 }
 
