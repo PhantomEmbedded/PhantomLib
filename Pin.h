@@ -24,9 +24,9 @@ namespace Phantom
 		uint8_t getBitMask() {return bitMask;}
 		uint8_t getTimer() {return timer;}
 		uint8_t getAnalogBit() {return analogBit;} // Only for analog pins
-		uint8_t getInputRegister() {return inputRegister;}
-		uint8_t getOutputRegister() {return outputRegister;}
-		uint8_t getModeRegister() {return modeRegister;}
+		uint16_t getInputRegister() {return inputRegister;}
+		uint16_t getOutputRegister() {return outputRegister;}
+		uint16_t getModeRegister() {return modeRegister;}
 	private:
 		uint8_t number;
 		// AVR
