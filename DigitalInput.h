@@ -16,6 +16,8 @@ namespace Phantom
 		bool get();
 	private:
 		Pin pin;
+
+		bool pullup;
 		
 	};
 }

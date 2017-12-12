@@ -14,6 +14,7 @@ DigitalOutput::DigitalOutput(Pin &pin): pin(pin)
 
 DigitalOutput::~DigitalOutput()
 {
+	// Return pin mode to output
 	uint8_t bit = pin.getBitMask();
 
 	uint8_t oldSREG = SREG;
