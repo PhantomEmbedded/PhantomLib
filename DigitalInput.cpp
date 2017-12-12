@@ -9,10 +9,10 @@ DigitalInput::DigitalInput(Pin &pin, bool pullup): pin(pin)
 
 	if (port == 0) return; // Check if valid
 
-	volatile uint8_t *reg, *out;
+	volatile uint16_t *reg, *out;
 
-	reg = port.getModeRegister();
-	out = port,getOutputRegister();
+	reg = pin.getModeRegister();
+	out = pin.getOutputRegister();
 
 	if (pullup)
 	{ 
@@ -38,6 +38,6 @@ DigitalInput::~DigitalInput()
 
 bool DigitalInput::get()
 {
-	if (pin.getPort() == NOT_A_PIN) return LOW;
+	if (pin.getPort() == NOT_A_PIN) return false;
 	return (*pin.getInputRegister() & pin.getBitMask());
 }
