@@ -14,21 +14,16 @@ DigitalInput::DigitalInput(Pin &pin, bool pullup): pin(pin), pullup(pullup)
 	reg = pin.getModeRegister();
 	out = pin.getOutputRegister();
 
+	uint8_t oldSREG = SREG;
+	cli();
+	*reg &= ~bit;
+
 	if (pullup)
-	{ 
-		uint8_t oldSREG = SREG;
-				cli();
-		*reg &= ~bit;
 		*out |= bit;
-	}
 	else
-	{
-		uint8_t oldSREG = SREG;
-				cli();
-		*reg &= ~bit;
 		*out &= ~bit;
-		SREG = oldSREG;
-	}
+	
+	SREG = oldSREG;
 }
 
 DigitalInput::~DigitalInput()
