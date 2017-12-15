@@ -1,19 +1,9 @@
 #ifndef PIN_H
 #define PIN_H
 
-#ifndef BOARD_BASE
-#error Please include a board type (e.g. #include <Boards/ArduinoUNO.h>)
-#endif
-
 #include <avr/pgmspace.h>
 
-// External arrays defined in board header
-extern const uint16_t PROGMEM portToModePGM[];
-extern const uint16_t PROGMEM portToInputPGM[];
-extern const uint16_t PROGMEM portToOutputPGM[];
-extern const uint8_t PROGMEM digitalPinToPortPGM[];
-extern const uint8_t PROGMEM digitalPinToBitMaskPGM[];
-extern const uint8_t PROGMEM digitalPinToTimerPGM[];
+#include "Boards/BoardBase.h"
 
 namespace Phantom
 {
@@ -32,6 +22,7 @@ namespace Phantom
 		volatile uint16_t *getOutputRegister() {return outputRegister;}
 		volatile uint16_t *getModeRegister() {return modeRegister;}
 	private:
+
 		uint8_t number;
 		// AVR
 		uint8_t port, bitMask, timer, analogBit;
