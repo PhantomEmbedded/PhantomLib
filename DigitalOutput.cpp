@@ -21,9 +21,11 @@ DigitalOutput::~DigitalOutput()
 	cli();
 	*pin.getModeRegister() &= ~bit;
 	*pin.getOutputRegister() |= bit;
+
+	SREG = oldSREG;
 }
 
-void DigitalOutput::set(bool state)
+inline void DigitalOutput::set(bool state)
 {
 	// The compiler will optomise these.
 	uint8_t bit = pin.getBitMask();

@@ -36,10 +36,12 @@ DigitalInput::~DigitalInput()
 		cli();
 		*pin.getModeRegister() &= ~bit;
 		*pin.getOutputRegister() |= bit;
+
+		SREG = oldSREG;
 	}
 }
 
-bool DigitalInput::get()
+inline bool DigitalInput::get()
 {
 	return *pin.getInputRegister() & pin.getBitMask();
 }
