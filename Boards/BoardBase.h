@@ -38,4 +38,12 @@
 #define TIMER5B 17
 #define TIMER5C 18
 
+// External arrays defined in board header
+extern const uint16_t portToModePGM[];
+extern const uint16_t portToInputPGM[];
+extern const uint16_t portToOutputPGM[];
+extern const uint8_t digitalPinToPortPGM[];
+extern const uint8_t digitalPinToBitMaskPGM[];
+extern const uint8_t digitalPinToTimerPGM[];
+
 #endif /* END BOARD_BASE */
