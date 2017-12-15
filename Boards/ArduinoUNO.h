@@ -55,7 +55,7 @@ namespace Phantom
 	// PCICR
 	inline volatile uint8_t* digitalPinToPCICR(uint8_t pin)
 	{
-		return ((pin) >= 0 && (pin) <= 21) ? (&PCICR) : ((uint8_t *)0);
+		return (pin <= 21) ? (&PCICR) : ((uint8_t *)0);
 	}
 
 	inline uint8_t digitalPinToPCICRbit(uint8_t pin)
