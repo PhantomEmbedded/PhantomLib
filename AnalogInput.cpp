@@ -4,9 +4,21 @@ using namespace Phantom;
 
 AnalogInput::AnalogInput(Pin *pin, bool pullup): pin(pin), pullup(pullup)
 {
+	auto bit = pin.getBitMask();
+	auto mode = pin.getModeRegister();
+	auto out = pin.getOutputRegister();
+	
+	// Clr mode bit (set input)
+	*mode &= ~bit;
+
+	// Set output for pullup
+	if (pullup)
+		*out |= bit;
+	else
+		*out &= ~bit;
+
 	// AREF = AVcc
 	ADMUX = (1<<REFS0);
-
 	// ADC Enable
 	ADCSRA = (1<<ADEN)|(1<<ADPS2)|(1<<ADPS1)|(1<<ADPS0);
 
