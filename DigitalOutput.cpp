@@ -20,7 +20,7 @@ DigitalOutput::~DigitalOutput()
 	//uint8_t oldSREG = SREG;
 	//cli();
 	*pin.getModeRegister() &= ~bit;
-	*pin.getOutputRegister() |= bit;
+	*pin.getOutputRegister() &= bit;
 
 	//SREG = oldSREG;
 }
