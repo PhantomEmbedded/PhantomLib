@@ -1,15 +1,14 @@
 #ifndef PHANTOM_H
 #define PHANTOM_H
 
-inline void sfrClearBit(uint8_t sfr, uint8_t bit)
-{
-	_SFR_BYTE(sfr) &= ~_BV(bit);
+#include <stdlib.h>
+
+void *operator new(size_t size) {
+  return malloc(size);
 }
 
-inline void sfrSetBit(uint8_t sfr, uint8_t bit)
-{
-	_SFR_BYTE(sfr) |= _BV(bit);
+void *operator new[](size_t size) {
+  return malloc(size);
 }
-
 
 #endif /* END PHANTOM_H */
