@@ -4,12 +4,10 @@ using namespace Phantom;
 
 DigitalOutput::DigitalOutput(Pin *pin): pin(pin)
 {
-	if (pin->getPort() == 0) return; // Check if valid
-
-	//uint8_t oldSREG = SREG;
-	//cli();
-	*pin->getModeRegister() |= pin->getBitMask();
-	//SREG = oldSREG;
+	// Set pin as output
+	auto bit = pin->getBitMask();
+	auto mode = pin->getModeRegister();
+	*mode |= bit;
 }
 
 DigitalOutput::~DigitalOutput()
