@@ -11,7 +11,7 @@ namespace Phantom
 	class DigitalOutput
 	{
 	public:
-		DigitalOutput(Pin &pin);
+		DigitalOutput(Pin *pin);
 		~DigitalOutput();
 
 		void set(bool state);
@@ -19,7 +19,7 @@ namespace Phantom
 		void pulse(double time, bool state);
 
 	private:
-		Pin pin;
+		Pin *pin;
 		
 	};
 }
