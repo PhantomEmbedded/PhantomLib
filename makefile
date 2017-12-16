@@ -18,7 +18,7 @@ OBJECTS    = main.cpp
 # Tune the lines below only if you know what you are doing:
 
 AVRDUDE = avrdude $(PROGRAMMER) -p $(DEVICE)
-COMPILE = avr-g++ -c -Wall -Wextra -std=c++11 -Os -mmcu=$(DEVICE) -DF_CPU=$(CLOCK)
+COMPILE = avr-g++ -Wall -Wextra -std=c++11 -O0 -mmcu=$(DEVICE) -DF_CPU=$(CLOCK)
 
 # symbolic targets:
 all:	main.hex
@@ -40,7 +40,7 @@ flash:	all
 	$(AVRDUDE) -U flash:w:main.hex:i
 	rm -f main.hex main.elf
 
-install: flash fuse
+install: flash
 
 # if you use a bootloader, change the command below appropriately:
 load: all
