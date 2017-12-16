@@ -6,10 +6,10 @@ DigitalOutput::DigitalOutput(Pin &pin): pin(pin)
 {
 	if (pin.getPort() == 0) return; // Check if valid
 
-	uint8_t oldSREG = SREG;
-	cli();
+	//uint8_t oldSREG = SREG;
+	//cli();
 	*pin.getModeRegister() |= pin.getBitMask();
-	SREG = oldSREG;
+	//SREG = oldSREG;
 }
 
 DigitalOutput::~DigitalOutput()
@@ -17,12 +17,12 @@ DigitalOutput::~DigitalOutput()
 	// Return pin mode to output
 	uint8_t bit = pin.getBitMask();
 
-	uint8_t oldSREG = SREG;
-	cli();
+	//uint8_t oldSREG = SREG;
+	//cli();
 	*pin.getModeRegister() &= ~bit;
 	*pin.getOutputRegister() |= bit;
 
-	SREG = oldSREG;
+	//SREG = oldSREG;
 }
 
 inline void DigitalOutput::set(bool state)
