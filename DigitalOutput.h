@@ -2,7 +2,6 @@
 #define DIGITAL_OUTPUT_H
 
 #include <avr/pgmspace.h>
-#include <avr/interrupt.h>
 #include <util/delay.h>
 #include "Pin.h"
 
