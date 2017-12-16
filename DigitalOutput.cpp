@@ -14,14 +14,10 @@ DigitalOutput::DigitalOutput(Pin &pin): pin(pin)
 
 DigitalOutput::~DigitalOutput()
 {
-	// Return pin mode to output
-	uint8_t bit = pin.getBitMask();
-
 	//uint8_t oldSREG = SREG;
 	//cli();
-	*pin.getModeRegister() &= ~bit;
-	*pin.getOutputRegister() &= bit;
-
+	*pin.getModeRegister() &= ~pin.getBitMask();
+	set(false);
 	//SREG = oldSREG;
 }
 
@@ -41,4 +37,15 @@ inline void DigitalOutput::set(bool state)
 	}
 
 	//SREG = oldSREG; // Only needed with interrupts
+}
+
+inline void DigitalOutput::pulse(double time, bool state)
+{
+	// Time to go low = 0.96us
+	// Time to go high = 0.8us
+	set(state);
+
+	_delay_us(time - (state ? 0.96 : 0.8));
+
+	set(!state);
 }

@@ -3,6 +3,7 @@
 
 #include <avr/pgmspace.h>
 #include <avr/interrupt.h>
+#include <util/delay.h>
 #include "Pin.h"
 
 namespace Phantom
@@ -14,6 +15,8 @@ namespace Phantom
 		~DigitalOutput();
 
 		void set(bool state);
+
+		void pulse(double time, bool state);
 
 	private:
 		Pin pin;
