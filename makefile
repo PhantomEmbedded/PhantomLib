@@ -18,7 +18,7 @@ OBJECTS    = main.cpp
 # Tune the lines below only if you know what you are doing:
 
 AVRDUDE = avrdude $(PROGRAMMER) -p $(DEVICE)
-COMPILE = avr-g++ -Wall -Wextra -std=c++11 -O0 -mmcu=$(DEVICE) -DF_CPU=$(CLOCK)
+COMPILE = avr-g++ -Wall -Wextra -std=c++11 -O3 -mmcu=$(DEVICE)
 
 # symbolic targets:
 all:	main.hex
