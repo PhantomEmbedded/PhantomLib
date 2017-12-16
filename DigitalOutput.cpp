@@ -42,10 +42,10 @@ inline void DigitalOutput::set(bool state)
 inline void DigitalOutput::pulse(double time, bool state)
 {
 	// Time to go low = 0.96us
-	// Time to go high = 0.8us
+	// Time to go high = 0.7us
 	set(state);
 
-	_delay_us(time - (state ? 0.96 : 0.8));
+	_delay_us(time - (state ? 0.96 : 0.7));
 
 	set(!state);
 }
