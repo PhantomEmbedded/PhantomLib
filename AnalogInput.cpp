@@ -4,9 +4,9 @@ using namespace Phantom;
 
 AnalogInput::AnalogInput(Pin *pin, bool pullup): pin(pin), pullup(pullup)
 {
-	auto bit = pin.getBitMask();
-	auto mode = pin.getModeRegister();
-	auto out = pin.getOutputRegister();
+	auto bit = pin->getBitMask();
+	auto mode = pin->getModeRegister();
+	auto out = pin->getOutputRegister();
 	
 	// Clr mode bit (set input)
 	*mode &= ~bit;
