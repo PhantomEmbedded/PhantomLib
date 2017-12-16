@@ -31,14 +31,14 @@ inline void DigitalOutput::set(bool state)
 	uint8_t bit = pin.getBitMask();
 	volatile uint16_t *out = pin.getOutputRegister();
 
-	uint8_t oldSREG = SREG;
-	cli();
+	//uint8_t oldSREG = SREG; // Only needed with interrupts
+	//cli(); // Only needed with interrupts
 
-	if (state == false) {
-		*out &= ~bit;
-	} else {
+	if (state) {
 		*out |= bit;
+	} else {
+		*out &= ~bit;
 	}
 
-	SREG = oldSREG;
+	//SREG = oldSREG; // Only needed with interrupts
 }
