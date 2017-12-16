@@ -11,7 +11,7 @@ namespace Phantom
 	#define F_CPU 16000000UL
 
 	const uint8_t PIN_COUNT = 20;
-	const uint8_t PIN_COUNT_ADC = 6;
+	const uint8_t PIN_COUNT_ADC = 8;
 	const uint8_t PIN_COUNT_DAC = 6;
 
 	// SPI
