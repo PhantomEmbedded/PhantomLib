@@ -2,6 +2,7 @@
 #define BOARD_BASE
 
 #include <avr/pgmspace.h>
+#include <avr/io.h>
 #include "../Phantom.h"
 
 const uint8_t NOT_A_PIN = 0;

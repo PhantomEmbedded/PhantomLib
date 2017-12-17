@@ -1,8 +1,6 @@
 #ifndef BOARD_ARDUINO_UNO_H
 #define BOARD_ARDUINO_UNO_H
 
-#include <avr/pgmspace.h>
-
 #include "BoardBase.h"
 
 namespace Phantom
@@ -159,43 +157,28 @@ namespace Phantom
 		_BV(5),
 	};
 
-	const uint8_t PROGMEM digitalPinToTimerPGM[] =
+	const uint16_t PROGMEM digitalPinToTimerPGM[] =
 	{
-		NOT_ON_TIMER, /* 0 - port D */
-		NOT_ON_TIMER,
-		NOT_ON_TIMER,
-		// on the ATmega168, digital pin 3 has hardware pwm
-	#if defined(__AVR_ATmega8__)
-		NOT_ON_TIMER,
-	#else
-		TIMER2B,
-	#endif
-		NOT_ON_TIMER,
-		// on the ATmega168, digital pins 5 and 6 have hardware pwm
-	#if defined(__AVR_ATmega8__)
-		NOT_ON_TIMER,
-		NOT_ON_TIMER,
-	#else
-		TIMER0B,
-		TIMER0A,
-	#endif
-		NOT_ON_TIMER,
-		NOT_ON_TIMER, /* 8 - port B */
-		TIMER1A,
-		TIMER1B,
-	#if defined(__AVR_ATmega8__)
-		TIMER2,
-	#else
-		TIMER2A,
-	#endif
 		NOT_ON_TIMER,
 		NOT_ON_TIMER,
 		NOT_ON_TIMER,
-		NOT_ON_TIMER, /* 14 - port C */
+		(uint16_t) &OCR2B,
+		NOT_ON_TIMER,
+		(uint16_t) &OCR0B,
+		(uint16_t) &OCR0A,
+		NOT_ON_TIMER,
+		NOT_ON_TIMER,
+		(uint16_t) &OCR1A,
+		(uint16_t) &OCR1B,
+		(uint16_t) &OCR2A,
 		NOT_ON_TIMER,
 		NOT_ON_TIMER,
 		NOT_ON_TIMER,
 		NOT_ON_TIMER,
+		NOT_ON_TIMER,
+		NOT_ON_TIMER,
+		NOT_ON_TIMER,
+		NOT_ON_TIMER
 	};
 }
 
