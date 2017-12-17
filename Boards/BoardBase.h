@@ -46,8 +46,8 @@ const uint8_t TIMER5C = 18;
 extern const uint16_t portToModePGM[];
 extern const uint16_t portToInputPGM[];
 extern const uint16_t portToOutputPGM[];
+extern const uint16_t digitalPinToTimerPGM[];
 extern const uint8_t digitalPinToPortPGM[];
 extern const uint8_t digitalPinToBitMaskPGM[];
-extern const uint8_t digitalPinToTimerPGM[];
 
 #endif /* END BOARD_BASE */
