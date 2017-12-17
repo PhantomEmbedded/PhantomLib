@@ -15,6 +15,10 @@ Pin::Pin(uint8_t number): number(number)
 
 Pin::~Pin()
 {
-	
+	// Delete pointers
+	delete timer;
+	delete modeRegister;
+	delete inputRegister;
+	delete outputRegister;
 }
 
