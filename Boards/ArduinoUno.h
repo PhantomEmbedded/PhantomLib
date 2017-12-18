@@ -10,7 +10,7 @@ namespace Phantom
 
 	const uint8_t PIN_COUNT = 20;
 	const uint8_t PIN_COUNT_ADC = 8;
-	const uint8_t PIN_COUNT_DAC = 6;
+	const uint8_t PIN_COUNT_PWM = 6;
 
 	// SPI
 	const uint8_t SPI_SS    = 10;
