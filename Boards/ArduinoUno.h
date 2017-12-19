@@ -38,11 +38,9 @@ namespace Phantom
 		switch (pin)
 		{
 			default: return false; break;
-			#ifndef __AVR_ATmega8__
 			case 3:
 			case 5:
 			case 6:
-			#endif
 			case 9:
 			case 10:
 			case 11:
@@ -53,29 +51,54 @@ namespace Phantom
 	// PCICR
 	inline volatile uint8_t* digitalPinToPCICR(uint8_t pin)
 	{
-		return (pin <= 21) ? (&PCICR) : ((uint8_t *)0);
+		if (pin <= 21)
+			return &PCICR;
+		else
+			return 0;
 	}
 
 	inline uint8_t digitalPinToPCICRbit(uint8_t pin)
 	{
-		return ((pin) <= 7) ? 2 : (((pin) <= 13) ? 0 : 1);
+		if (pin <= 7)
+			return 2;
+		else if (pin <= 13)
+			return 0;
+		else
+			return 1;
 	}
 
 	// PCMSK
 	inline volatile uint8_t*  digitalPinToPCMSK(uint8_t pin)
 	{
-		return ((pin) <= 7) ? (&PCMSK2) : (((pin) <= 13) ? (&PCMSK0) : (((pin) <= 21) ? (&PCMSK1) : ((uint8_t *)0)));
+		if (pin <= 7)
+			return &PCMSK2;
+		else if (pin <= 13)
+			return PCMSK0;
+		else if (pin <= 21)
+			return PCMSK1;
+		else
+			return 0;
 	}
 
 	inline uint8_t digitalPinToPCMSKbit(uint8_t pin)
 	{
-		return ((pin) <= 7) ? (pin) : (((pin) <= 13) ? ((pin) - 8) : ((pin) - 14));
+		if (pin <= 7)
+			return pin;
+		else if (pin <= 13)
+			return (pin - 8);
+		else
+			return (pin - 14);
 	}
 
 	// Interrupt
 	inline uint8_t digitalPinToInterrupt(uint8_t pin)
 	{
-		return (pin) == 2 ? 0 : ((pin) == 3 ? 1 : NOT_AN_INTERRUPT);
+		if (pin == 2)
+			return 0;
+		else if (pin == 3)
+			return 1;
+		else
+			return NOT_AN_INTERRUPT;
 	}
 
 	// Port Mapping
