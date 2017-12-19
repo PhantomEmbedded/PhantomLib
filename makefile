@@ -1,23 +1,19 @@
 # avr-g++ arguments
 
 AVR_DEVICE = atmega328p
+AVR_SOURCE = main.cpp 
+AVR_TARGET = main.hex
 
 # avrdude arguments
 
-AVRDUDE_PORT = /dev/ttyUSB*
-AVRDUDE_BAUD = 115200
-AVRDUDE_PROGRAMMER = usbasp 
-
-# board include
-
-BOARDFILE = ./Boards/ArduinoUno.h
-
-vpath %.cpp ./
-vpath %.h ./
-
+AVRDUDE_PORT = /dev/ttyUSB0
+AVRDUDE_BAUD = 57600
+AVRDUDE_PROGRAMMER = arduino 
 
 ######################################################################
 ######################################################################
+
+
 
 # Tune the lines below only if you know what you are doing:
 
@@ -27,28 +23,24 @@ AVRDUDE = avrdude \
 	-b$(AVRDUDE_BAUD) \
 	-c$(AVRDUDE_PROGRAMMER)
 AVR_GPP = avr-g++ -Wall -Wextra -std=c++11 -O3 \
-	-mmcu=$(AVR_DEVICE)
+	-mmcu=$(AVR_DEVICE) 
 
 # symbolic targets:
-all:
+all:	$(AVR_TARGET)
 
 flash:	all
-	$(AVRDUDE) -U flash:w:main.hex:i
-	rm -f main.hex main.elf
+	$(AVRDUDE) -U flash:w:$(AVR_TARGET):i
+	rm -f $(AVR_TARGET) main.elf
 
 clean:
-	rm -f main.hex main.elf
+	rm -f $(AVR_TARGET) main.elf
 
 # file targets:
-%.o : %.cpp
-	$(AVR_GPP) -o main.elf $<
+main.elf: $(AVR_SOURCE)
+	$(AVR_GPP) -o $@ $^
 
-%: %.o
+$(AVR_TARGET): main.elf
 	rm -f main.hex
-	avr-objcopy -j .text -j .data -O ihex $< main.hex
+	avr-objcopy -j .text -j .data -O ihex main.elf $(AVR_TARGET)
 
 # Board Options
-
-ArduinoUno:	AVR_PROCESSOR = atmega328p
-ArduinoUno: BOARDFILE = ./Boards/ArduinoUno.h
-ArduinoUno: flash
