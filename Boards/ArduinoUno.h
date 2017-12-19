@@ -73,9 +73,9 @@ namespace Phantom
 		if (pin <= 7)
 			return &PCMSK2;
 		else if (pin <= 13)
-			return PCMSK0;
+			return &PCMSK0;
 		else if (pin <= 21)
-			return PCMSK1;
+			return &PCMSK1;
 		else
 			return 0;
 	}
