@@ -12,6 +12,9 @@ AVRDUDE_PROGRAMMER = usbasp
 
 BOARDFILE = ./Boards/ArduinoUno.h
 
+vpath %.cpp ./
+vpath %.h ./
+
 
 ######################################################################
 ######################################################################
@@ -27,7 +30,7 @@ AVR_GPP = avr-g++ -Wall -Wextra -std=c++11 -O3 \
 	-mmcu=$(AVR_DEVICE)
 
 # symbolic targets:
-all:	main.hex
+all:
 
 flash:	all
 	$(AVRDUDE) -U flash:w:main.hex:i
@@ -40,9 +43,9 @@ clean:
 %.o : %.cpp
 	$(AVR_GPP) -o main.elf $<
 
-main.hex: main.elf
+%: %.o
 	rm -f main.hex
-	avr-objcopy -j .text -j .data -O ihex main.elf main.hex
+	avr-objcopy -j .text -j .data -O ihex $< main.hex
 
 # Board Options
 
