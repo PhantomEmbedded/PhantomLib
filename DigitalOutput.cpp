@@ -37,6 +37,14 @@ inline void DigitalOutput::set(bool state)
 	//SREG = oldSREG; // Only needed with interrupts
 }
 
+inline void DigitalOutput::toggle()
+{
+	auto bit = pin->getBitMask();
+	auto out = pin->getOutputRegister();
+
+	*out ^= bit;
+}
+
 inline void DigitalOutput::pulse(double time, bool state)
 {
 	// Time to go low = 0.96us

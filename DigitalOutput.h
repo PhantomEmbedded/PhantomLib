@@ -15,6 +15,8 @@ namespace Phantom
 
 		void set(bool state);
 
+		void toggle();
+
 		void pulse(double time, bool state);
 
 	private:
