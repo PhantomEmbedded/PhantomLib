@@ -12,11 +12,10 @@ DigitalOutput::DigitalOutput(Pin *pin): pin(pin)
 
 DigitalOutput::~DigitalOutput()
 {
-	//uint8_t oldSREG = SREG;
-	//cli();
-	*pin->getModeRegister() &= ~pin->getBitMask();
+	auto bit = pin->getBitMask();
+	auto mode = pin->getModeRegister();
+	*mode &= ~bit;
 	set(false);
-	//SREG = oldSREG;
 }
 
 inline void DigitalOutput::set(bool state)
@@ -25,16 +24,11 @@ inline void DigitalOutput::set(bool state)
 	auto bit = pin->getBitMask();
 	auto out = pin->getOutputRegister();
 
-	//uint8_t oldSREG = SREG; // Only needed with interrupts
-	//cli(); // Only needed with interrupts
-
 	if (state) {
 		*out |= bit;
 	} else {
 		*out &= ~bit;
 	}
-
-	//SREG = oldSREG; // Only needed with interrupts
 }
 
 inline void DigitalOutput::toggle()
