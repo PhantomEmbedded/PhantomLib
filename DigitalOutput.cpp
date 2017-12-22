@@ -22,8 +22,8 @@ DigitalOutput::~DigitalOutput()
 inline void DigitalOutput::set(bool state)
 {
 	// The compiler will optomise these.
-	uint8_t bit = pin->getBitMask();
-	volatile uint16_t *out = pin->getOutputRegister();
+	auto bit = pin->getBitMask();
+	auto out = pin->getOutputRegister();
 
 	//uint8_t oldSREG = SREG; // Only needed with interrupts
 	//cli(); // Only needed with interrupts
