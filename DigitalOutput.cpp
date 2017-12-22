@@ -47,11 +47,9 @@ inline void DigitalOutput::toggle()
 
 inline void DigitalOutput::pulse(double time, bool state)
 {
-	// Time to go low = 0.96us
-	// Time to go high = 0.7us
 	set(state);
 
-	_delay_us(time - (state ? 0.96 : 0.7));
+	_delay_us(time);
 
 	set(!state);
 }
