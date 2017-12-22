@@ -12,16 +12,12 @@ DigitalInput::DigitalInput(Pin &pin, bool pullup): pin(pin), pullup(pullup)
 	reg = pin.getModeRegister();
 	out = pin.getOutputRegister();
 
-	uint8_t oldSREG = SREG;
-	cli();
 	*reg &= ~bit;
 
 	if (pullup)
 		*out |= bit;
 	else
 		*out &= ~bit;
-	
-	SREG = oldSREG;
 }
 
 DigitalInput::~DigitalInput()
@@ -29,13 +25,8 @@ DigitalInput::~DigitalInput()
 	if (pullup) // Return pin mode to input
 	{
 		uint8_t bit = pin.getBitMask();
-
-		uint8_t oldSREG = SREG;
-		cli();
 		*pin.getModeRegister() &= ~bit;
 		*pin.getOutputRegister() |= bit;
-
-		SREG = oldSREG;
 	}
 }
 
