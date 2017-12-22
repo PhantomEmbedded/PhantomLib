@@ -7,8 +7,6 @@ DigitalInput::DigitalInput(Pin &pin, bool pullup): pin(pin), pullup(pullup)
 	uint8_t port = pin.getPort();
 	uint8_t bit = pin.getBitMask();
 
-	if (port == 0) return; // Check if valid
-
 	volatile uint16_t *reg, *out;
 
 	reg = pin.getModeRegister();
