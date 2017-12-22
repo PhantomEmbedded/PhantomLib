@@ -4,16 +4,12 @@ using namespace Phantom;
 
 DigitalInput::DigitalInput(Pin &pin, bool pullup): pin(pin), pullup(pullup)
 {
-	uint8_t port = pin.getPort();
-	uint8_t bit = pin.getBitMask();
+	auto bit = pin.getBitMask();
 
-	volatile uint16_t *reg, *out;
+	auto mode = pin.getModeRegister();
+	*mode &= ~bit;
 
-	reg = pin.getModeRegister();
-	out = pin.getOutputRegister();
-
-	*reg &= ~bit;
-
+	auto out = pin.getOutputRegister();
 	if (pullup)
 		*out |= bit;
 	else
@@ -22,15 +18,17 @@ DigitalInput::DigitalInput(Pin &pin, bool pullup): pin(pin), pullup(pullup)
 
 DigitalInput::~DigitalInput()
 {
-	if (pullup) // Return pin mode to input
-	{
-		uint8_t bit = pin.getBitMask();
-		*pin.getModeRegister() &= ~bit;
-		*pin.getOutputRegister() |= bit;
+	if (pullup)
+	{	// Drive output low
+		auto bit = pin.getBitMask();
+		auto out = pin.getOutputRegister();
+		*out |= bit;
 	}
 }
 
 inline bool DigitalInput::get()
 {
-	return *pin.getInputRegister() & pin.getBitMask();
+	auto bit = pin.getBitMask();
+	auto in = pin.getInputRegister():
+	return *in & bit;
 }
