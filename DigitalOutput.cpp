@@ -12,10 +12,10 @@ DigitalOutput::DigitalOutput(Pin *pin): pin(pin)
 
 DigitalOutput::~DigitalOutput()
 {
+	set(false);
 	auto bit = pin->getBitMask();
 	auto mode = pin->getModeRegister();
 	*mode &= ~bit;
-	set(false);
 }
 
 inline void DigitalOutput::set(bool state)
