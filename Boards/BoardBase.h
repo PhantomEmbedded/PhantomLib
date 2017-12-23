@@ -10,7 +10,7 @@ const uint8_t NOT_A_PORT = 0;
 
 const uint8_t NOT_AN_INTERRUPT = -1;
 
-extern const uint8_t A0;
+extern const uint8_t A0; // Used to index first analog pin. Needs to be changed to some kind of array
 
 const uint8_t PA = 1;
 const uint8_t PB = 2;
