@@ -1,10 +1,6 @@
 CC=avr-g++
 
-CLASSES = \
-	DigitalOutput.o \
-	DigitalInput.o \
-	Pin.o \
-	AnalogInput.o
+CLASSES = *.h
 
 
 %.o: %.cpp
