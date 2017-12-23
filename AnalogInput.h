@@ -1,6 +1,9 @@
 #ifndef ANALOG_INPUT_H
 #define ANALOG_INPUT_H
 
+#include <avr/pgmspace.h>
+#include "Pin.h"
+
 namespace Phantom
 {
 	class AnalogInput

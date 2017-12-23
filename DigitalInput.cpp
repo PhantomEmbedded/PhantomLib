@@ -31,6 +31,6 @@ inline bool DigitalInput::get()
 {
 	// Read bit from input register
 	auto bit = pin.getBitMask();
-	auto in = pin.getInputRegister():
+	auto in = pin.getInputRegister();
 	return *in & bit;
 }

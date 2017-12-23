@@ -10,12 +10,12 @@ namespace Phantom
 	class DigitalInput
 	{
 	public:
-		DigitalInput(Pin &pin, bool pullup);
+		DigitalInput(Pin *pin, bool pullup);
 		~DigitalInput();
 
 		bool get();
 	private:
-		Pin pin;
+		Pin *pin;
 
 		bool pullup;
 		

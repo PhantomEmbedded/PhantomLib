@@ -10,6 +10,8 @@ const uint8_t NOT_A_PORT = 0;
 
 const uint8_t NOT_AN_INTERRUPT = -1;
 
+extern const uint8_t A0;
+
 const uint8_t PA = 1;
 const uint8_t PB = 2;
 const uint8_t PC = 3;
