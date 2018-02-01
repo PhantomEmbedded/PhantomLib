@@ -1,14 +1,13 @@
-CC=avr-g++
-
-CLASSES = *.h
-
+CC=avr-gcc
+CPP=avr-g++
+CPPFILES = $(wildcard ./*.cpp)
 
 %.o: %.cpp
-	@avr-g++ -c -o $@ $< -mmcu=atmega328p -Wall -Wextra -std=c++11 -O3 -I.
+	@$(CPP) -c -o $@ $< -mmcu=atmega328p -Wall -Wextra -Werror -std=c++11 -O3 -I.
 
-all: $(CLASSES)
+all: $(CPPFILES)
 	@echo "Building library"
-	avr-ar rcsv libPhantom.a $^
+	@avr-ar rcsv libPhantom.a $^
 
 clean:
 	@rm *.o
