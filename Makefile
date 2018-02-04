@@ -8,7 +8,7 @@ FILES = $(wildcard ./*.cpp)
 
 all: $(FILES)
 	@echo "Building library"
-	avr-ar rcsv libPhantom.a $^
+	avr-ar rcsv libphantom.a $^
 
 clean:
 	@rm *.o
