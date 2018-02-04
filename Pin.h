@@ -2,8 +2,7 @@
 #define PIN_H
 
 #include <avr/pgmspace.h>
-
-#include "Boards/BoardBase.h"
+#include <Boards/BoardBase.h>
 
 namespace Phantom
 {

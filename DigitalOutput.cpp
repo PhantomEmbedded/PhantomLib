@@ -1,4 +1,4 @@
-#include "DigitalOutput.h"
+#include <DigitalOutput.h>
 
 using namespace Phantom;
 
@@ -24,7 +24,7 @@ DigitalOutput::~DigitalOutput()
 	*mode &= ~bit;
 }
 
-inline void DigitalOutput::set(bool state)
+void DigitalOutput::set(bool state)
 {
 	// The compiler will optomise these.
 	auto bit = pin->getBitMask();
@@ -36,14 +36,14 @@ inline void DigitalOutput::set(bool state)
 		*out &= ~bit; // low
 }
 
-inline void DigitalOutput::toggle()
+void DigitalOutput::toggle()
 {
 	auto bit = pin->getBitMask();
 	auto out = pin->getOutputRegister();
 	*out ^= bit; // Toggle state
 }
 
-inline void DigitalOutput::pulse(double time, bool state)
+void DigitalOutput::pulse(double time, bool state)
 {
 	set(state);
 	_delay_us(time);

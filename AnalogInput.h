@@ -2,7 +2,7 @@
 #define ANALOG_INPUT_H
 
 #include <avr/pgmspace.h>
-#include "Pin.h"
+#include <Pin.h>
 
 namespace Phantom
 {

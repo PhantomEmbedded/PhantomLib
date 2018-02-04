@@ -3,7 +3,7 @@
 
 #include <avr/pgmspace.h>
 #include <avr/interrupt.h>
-#include "Pin.h"
+#include <Pin.h>
 
 namespace Phantom
 {
