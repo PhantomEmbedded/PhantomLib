@@ -47,6 +47,12 @@ namespace Phantom
 	const uint8_t TIMER5C = 18;
 
 	// External arrays defined in board header
+	extern const uint16_t USART_DR[];
+	extern const uint16_t USART_CSR_A[];
+	extern const uint16_t USART_CSR_B[];
+	extern const uint16_t USART_CSR_C[];
+	extern const uint16_t USART_BRR_L[];
+	extern const uint16_t USART_BRR_H[];
 	extern const uint16_t portToModePGM[];
 	extern const uint16_t portToInputPGM[];
 	extern const uint16_t portToOutputPGM[];
