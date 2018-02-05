@@ -1,7 +1,7 @@
 #ifndef BOARD_ARDUINO_UNO_H
 #define BOARD_ARDUINO_UNO_H
 
-#include "BoardBase.h"
+#include <BoardBase.h>
 
 namespace Phantom
 {
@@ -12,6 +12,12 @@ namespace Phantom
 	const uint8_t PIN_COUNT_ADC = 8;
 	const uint8_t PIN_COUNT_PWM = 6;
 
+	// USART
+	const uint8_t USART0_RXD = 0;
+	const uint8_t USART0_TXD = 1;
+	const uint8_t USART0_XCK = 4;
+
+
 	// SPI
 	const uint8_t SPI_SS    = 10;
 	const uint8_t SPI_MOSI 	= 11;
@@ -21,6 +27,7 @@ namespace Phantom
 	// I2C (Wire)
 	const uint8_t I2C_SDA = 18;
 	const uint8_t I2C_SCL = 19;
+
 	// Analog
 	const uint8_t A0 = 14;
 	const uint8_t A1 = 15;
