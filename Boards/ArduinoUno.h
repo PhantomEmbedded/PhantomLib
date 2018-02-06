@@ -5,9 +5,6 @@
 
 namespace Phantom
 {
-
-	#define F_CPU 16000000UL
-
 	const uint8_t PIN_COUNT = 20;
 	const uint8_t PIN_COUNT_ADC = 8;
 	const uint8_t PIN_COUNT_PWM = 6;
@@ -16,32 +13,32 @@ namespace Phantom
 	const uint16_t PROGMEM USART_DR[] =
 	{
 		(uint16_t) &UDR0
-	}
+	};
 
 	const uint16_t PROGMEM USART_CSR_A[] =
 	{
 		(uint16_t) &UCSR0A
-	}
+	};
 
 	const uint16_t PROGMEM USART_CSR_B[] =
 	{
 		(uint16_t) &UCSR0B
-	}
+	};
 
 	const uint16_t PROGMEM USART_CSR_C[] =
 	{
 		(uint16_t) &UCSR0C
-	}
+	};
 
 	const uint16_t PROGMEM USART_BRR_L[] =
 	{
 		(uint16_t) &UBRR0L
-	}
+	};
 
 	const uint16_t PROGMEM USART_BRR_H[] =
 	{
 		(uint16_t) &UBRR0H
-	}
+	};
 
 	// USART Pins
 	const uint8_t USART0_RXD = 0;

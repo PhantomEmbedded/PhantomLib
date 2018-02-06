@@ -1,6 +1,8 @@
 #include <USART.h>
 
-USART::USART(OperatingMode mode, uint16_t baud, uint8_t bits, uint8_t parity, uint8_t stop)
+using namespace Phantom;
+
+USART::USART()
 {
 	uint8_t port = 0; // temp
 	DR 		= (volatile uint16_t *)(pgm_read_word(USART_DR + port));
@@ -8,186 +10,141 @@ USART::USART(OperatingMode mode, uint16_t baud, uint8_t bits, uint8_t parity, ui
 	CSR_B 	= (volatile uint16_t *)(pgm_read_word(USART_CSR_B + port));
 	CSR_C 	= (volatile uint16_t *)(pgm_read_word(USART_CSR_C + port));
 	BRR_L 	= (volatile uint16_t *)(pgm_read_word(USART_BRR_L + port));
-	BRR_H 	= (volatile uint16_t *)(pgm_read_word(USART_BRR_L + port));
+	BRR_H 	= (volatile uint16_t *)(pgm_read_word(USART_BRR_H + port));
+
+	enable_rx();
+	enable_tx();
+
+	set_operating_mode(AsyncNormalMode);
+	set_baud_rate(115200);
+	set_frame_bits(8);
+	set_parity(NoParity);
+	set_stop_bits(1);
 }
 
-// Register Manipulation
-
-void USART::write_io_register(uint8_t data)
+USART::~USART()
 {
-	*DR = data;
+	disable_rx();
+	disable_tx();
 }
 
-uint8_t USART::read_io_register()
+void USART::transmit(uint16_t data)
 {
-	return *DR;
+	while (!data_register_empty());
+
+	if (frame_bits > 8)
+	{
+		if (data & 0x0100)
+			set_bit(CSR_B, TXB80);
+		else
+			clear_bit(CSR_B, TXB80);
+	}
+
+	*DR = (uint8_t)data;
 }
 
-bool USART::receive_complete()
+uint16_t USART::receive()
 {
-	return *CSR_A & (1 << RXC);
-}
+	uint16_t data;
+	while (!data_received());
 
-bool USART::transmit_complete()
-{
-	return *CSR_A & (1 << TXC);
-}
-
-void USART::transmit_complete(bool state)
-{
-	if (state)
-		*CSR_A |= (1 << TXC);
+	if (frame_bits > 8)
+	{
+		uint8_t bit8 = (*CSR_B >> 1) & 0b1;
+		data = ((bit8 << 8) | *DR);
+	}
 	else
-		*CSR_A &= ~(1 << TXC);
+		data = *DR;
+
+	return data;
+}
+
+void USART::enable_rx() 	{ set_bit(CSR_B, RXEN0); }
+
+void USART::disable_rx() 	{ clear_bit(CSR_B, RXEN0); }
+
+void USART::enable_tx() 	{ set_bit(CSR_B, TXEN0); }
+
+void USART::disable_tx() 	{ clear_bit(CSR_B, TXEN0); }
+
+void USART::set_operating_mode(OperatingMode mode)
+{
+	*CSR_C &= ~(0b11 << UMSEL00);
+
+	*CSR_C |= (mode << UMSEL00);
+}
+
+void USART::set_baud_rate(uint32_t baud)
+{
+	uint32_t max_baud = (F_CPU / (16L * 4096L));
+
+	if (baud < max_baud)
+	{
+		baud_rate = F_CPU / operating_mode / baud - 1;
+		*BRR_H = (uint8_t)(baud_rate >> 8);
+		*BRR_L = (uint8_t)(baud_rate);
+	}
+}
+
+void USART::set_frame_bits(uint8_t n)
+{
+	frame_bits = n;
+
+	*CSR_C &= ~(0b111 << UCSZ00);
+
+	uint8_t output;
+	switch (n)
+	{
+		case 5: output = 0b000; break;
+		case 6: output = 0b001; break;
+		case 7: output = 0b010; break;
+		case 8: output = 0b011; break;
+		case 9: output = 0b111; break;
+		default: output = 0b011; break; // 8
+	}
+
+	*CSR_C |= (output << UCSZ00);
+}
+
+void USART::set_parity(ParityMode mode)
+{
+	parity_mode = mode;
+
+	*CSR_C &= ~(0b111 << UMSEL00);
+
+	*CSR_C |= (mode << UMSEL00);
+}
+
+void USART::set_stop_bits(uint8_t n)
+{
+	stop_bits = n;
+
+	switch (n)
+	{
+		case 1: set_bit(CSR_B, USBS0); break;
+		case 2: clear_bit(CSR_B, USBS0); break;
+	}
 }
 
 bool USART::data_register_empty()
 {
-	return *CSR_A & (1 << UDRE);
+	// true: empty, false: full
+	return *CSR_A & (1 << UDRE0);
 }
 
-bool USART::frame_error()
+bool USART::data_received()
 {
-	return *CSR_A & (1 << FE);
+	return *CSR_A & (1 << RXC0);
 }
 
-bool USART::data_overrun()
+// Register Manipulation
+
+void USART::clear_bit(volatile uint16_t *reg, uint8_t bit)
 {
-	return *CSR_A & (1 << DOR);
+	*reg &= ~(1 << bit);
 }
 
-bool USART::parity_error()
+void USART::set_bit(volatile uint16_t *reg, uint8_t bit)
 {
-	return *CSR_A & (1 << UPE)
-}
-
-void USART::double_transmission_speed(bool state)
-{
-	if (state)
-		*CSR_A |= (1 << U2X);
-	else
-		*CSR_A &= ~(1 << U2X);
-}
-
-bool USART::double_transmission_speed()
-{
-	return *CSR_A & (1 << U2X);
-}
-
-void USART::multi_processor_communication_mode(bool state)
-{
-	if (state)
-		*CSR_A |= (1 << MPCM);
-	else
-		*CSR_A &= ~(1 << MPCM);
-}
-
-bool USART::rx_complete_interrupt_enable()
-{
-
-}
-
-void USART::rx_complete_interrupt_enable(bool enabled)
-{
-
-}
-
-bool USART::tx_complete_interrupt_enable()
-{
-
-}
-
-void USART::tx_complete_interrupt_enable(bool enabled)
-{
-
-}
-
-bool USART::data_register_empty_interrupt_enable()
-{
-
-}
-
-void USART::data_register_empty_interrupt_enable(bool enabled)
-{
-
-}
-
-bool USART::rx_enable()
-{
-
-}
-
-void USART::rx_enable(bool enabled)
-{
-
-}
-
-bool USART::tx_enable()
-{
-
-}
-
-void USART::tx_enable(bool enabled)
-{
-
-}
-
-void USART::frame_character_size(uint8_t size)
-{
-
-}
-
-bool USART::rx_data_bit_8()
-{
-
-}
-
-bool USART::tx_data_bit_8()
-{
-
-}
-
-void USART::tx_data_bit_8(bool state)
-{
-
-}
-
-OperatingMode USART::mode_select()
-{
-
-}
-
-void USART::mode_select(OperatingMode mode)
-{
-
-}
-
-ParityMode USART::parity_mode()
-{
-
-}
-
-void USART::parity_mode(ParityMode mdoe)
-{
-
-}
-
-uint8_t USART::stop_bits()
-{
-
-}
-
-void USART::stop_bits()
-{
-
-}
-
-ClockPolarityMode USART::clock_polarity()
-{
-
-}
-
-void USART::clock_polarity(ClockPolarityMode mode)
-{
-
+	*reg |= (1 << bit);
 }

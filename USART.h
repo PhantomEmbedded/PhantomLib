@@ -1,7 +1,8 @@
 #ifndef USART_H
 #define USART_H
 
-#include <BoardBase.h>
+#include <Boards/BoardBase.h>
+#include <avr/pgmspace.h>
 
 namespace Phantom
 {
@@ -13,24 +14,40 @@ namespace Phantom
 			AsyncNormalMode = 16,
 			AsyncDoubleSpeedMode = 8,
 			SyncMasterMode = 2
-		}
+		};
 
 		enum ParityMode
 		{
-			Disabled,
-			Reserved,
-			EnabledEven,
-			EnabledOdd
-		}
+			NoParity	= 0b00,
+			EnabledEven = 0b10,
+			EnabledOdd 	= 0b11
+		};
 
 		enum ClockPolarityMode
 		{
 			TXRisingRXFalling = 0,
 			RXRisingTXFalling = 1
-		}
+		};
 
-		USART(OperatingMode mode, uint16_t baud, uint8_t bits, uint8_t parity, uint8_t stop);
+		USART();
+		USART(
+			OperatingMode mode,
+			uint32_t baud_rate,
+			uint8_t frame_bits,
+			uint8_t parity_bits,
+			uint8_t stop_bits
+		);
 		~USART();
+
+		void transmit(uint16_t data);
+		uint16_t receive();
+
+		void set_operating_mode(OperatingMode mode);
+		void set_baud_rate(uint32_t baud);
+		void set_frame_bits(uint8_t bits);
+		void set_parity(ParityMode mode);
+		void set_stop_bits(uint8_t bits);
+
 	private:
 		// Registers
 		volatile uint16_t *DR;
@@ -40,50 +57,25 @@ namespace Phantom
 		volatile uint16_t *BRR_L;
 		volatile uint16_t *BRR_H;
 
-		// USART I/O Data Register 0
-		void write_io_register(uint8_t data);
-		uint8_t read_io_register();
+		OperatingMode operating_mode;
+		uint32_t baud_rate, baud_rate_max;
+		uint8_t frame_bits;
+		ParityMode parity_mode;
+		uint8_t stop_bits;
 
-		// USART Control and Status Register A
-		bool receive_complete();	// RXC
-		bool transmit_complete();	// TXC
-		void transmit_complete(bool state);	// TXC
-		bool data_register_empty(); // UDRE
-		bool frame_error();			// FE
-		bool data_overrun();		// DOR
-		bool parity_error();		// UPE
-		void double_transmission_speed(bool state); // U2X
-		bool double_transmission_speed(); // U2X
-		void multi_processor_communication_mode(bool state); // MPCM
-		bool multi_processor_communication_mode(); // MPCM
+		// enable/disable rx/tx
+		void enable_rx();
+		void disable_rx();
+		void enable_tx();
+		void disable_tx();
 
-		// USART Control and Status Register B
-		bool rx_complete_interrupt_enable();
-		void rx_complete_interrupt_enable(bool enabled);
-		bool tx_complete_interrupt_enable();
-		void tx_complete_interrupt_enable(bool enabled);
-		bool data_register_empty_interrupt_enable();
-		void data_register_empty_interrupt_enable(bool enabled);
-		bool rx_enable();
-		void rx_enable(bool enabled);
-		bool tx_enable();
-		void tx_enable(bool enabled);
-		void frame_character_size(uint8_t size);
-		bool rx_data_bit_8();
-		bool tx_data_bit_8();
-		void tx_data_bit_8(bool state);
+		// status helpers
+		bool data_register_empty();
+		bool data_received();
 
-		// USART Control and Status Register C
-		OperatingMode mode_select();
-		void mode_select(OperatingMode mode);
-		ParityMode parity_mode();
-		void parity_mode(ParityMode mdoe);
-		uint8_t stop_bits();
-		void stop_bits();
-			// Character size defined in register B section
-		ClockPolarityMode clock_polarity();
-		void clock_polarity(ClockPolarityMode mode);
-
+		// register helper functions
+		void clear_bit(volatile uint16_t *reg, uint8_t bit);
+		void set_bit(volatile uint16_t *reg, uint8_t bit);
 	};
 }
 
