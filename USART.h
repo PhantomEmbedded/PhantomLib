@@ -42,6 +42,8 @@ namespace Phantom
 		void transmit(uint16_t data);
 		uint16_t receive();
 
+		void flush();
+
 		void set_operating_mode(OperatingMode mode);
 		void set_baud_rate(uint32_t baud);
 		void set_frame_bits(uint8_t bits);
