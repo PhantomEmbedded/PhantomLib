@@ -2,7 +2,6 @@
 #define DIGITAL_OUTPUT_H
 
 #include <avr/pgmspace.h>
-#include <util/delay.h>
 #include <Pin.h>
 
 namespace Phantom
@@ -16,8 +15,6 @@ namespace Phantom
 		void set(bool state);
 
 		void toggle();
-
-		void pulse(double time, bool state);
 
 	private:
 		Pin *pin;

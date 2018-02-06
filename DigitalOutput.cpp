@@ -42,10 +42,3 @@ void DigitalOutput::toggle()
 	auto out = pin->getOutputRegister();
 	*out ^= bit; // Toggle state
 }
-
-void DigitalOutput::pulse(double time, bool state)
-{
-	set(state);
-	_delay_us(time);
-	set(!state);
-}
