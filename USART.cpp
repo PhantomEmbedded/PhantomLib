@@ -59,6 +59,13 @@ uint16_t USART::receive()
 	return data;
 }
 
+void USART::flush()
+{
+	uint8_t dummy;
+	while (data_received())
+		dummy = *DR;
+}
+
 void USART::enable_rx() 	{ set_bit(CSR_B, RXEN0); }
 
 void USART::disable_rx() 	{ clear_bit(CSR_B, RXEN0); }
