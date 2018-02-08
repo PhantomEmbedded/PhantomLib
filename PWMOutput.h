@@ -13,7 +13,7 @@ namespace Phantom
 		PWMOutput(Pin *pin);
 		~PWMOutput();
 		
-		void set(uint8_t value);
+		inline void set(uint8_t value);
 
 	private:
 		Pin *pin;

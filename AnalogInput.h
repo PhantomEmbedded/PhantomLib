@@ -12,7 +12,7 @@ namespace Phantom
 		AnalogInput(Pin *pin, bool pullup);
 		~AnalogInput();
 
-		uint16_t get();
+		inline uint16_t get();
 		
 	private:
 		Pin *pin;

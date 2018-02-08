@@ -12,9 +12,9 @@ namespace Phantom
 		DigitalOutput(Pin *pin);
 		~DigitalOutput();
 
-		void set(bool state);
+		inline void set(bool state);
 
-		void toggle();
+		inline void toggle();
 
 	private:
 		Pin *pin;

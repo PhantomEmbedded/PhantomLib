@@ -24,7 +24,7 @@ DigitalOutput::~DigitalOutput()
 	*mode &= ~bit;
 }
 
-void DigitalOutput::set(bool state)
+inline void DigitalOutput::set(bool state)
 {
 	// The compiler will optomise these.
 	auto bit = pin->getBitMask();
@@ -36,7 +36,7 @@ void DigitalOutput::set(bool state)
 		*out &= ~bit; // low
 }
 
-void DigitalOutput::toggle()
+inline void DigitalOutput::toggle()
 {
 	auto bit = pin->getBitMask();
 	auto out = pin->getOutputRegister();

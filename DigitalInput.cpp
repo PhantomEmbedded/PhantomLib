@@ -27,7 +27,7 @@ DigitalInput::~DigitalInput()
 	}
 }
 
-bool DigitalInput::get()
+inline bool DigitalInput::get()
 {
 	// Read bit from input register
 	auto bit = pin->getBitMask();

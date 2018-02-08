@@ -37,7 +37,7 @@ AnalogInput::~AnalogInput()
 	}
 }
 
-uint16_t AnalogInput::get()
+inline uint16_t AnalogInput::get()
 {
 	uint8_t pinNumber = pin->getNumber() - A0; // Subtract first analog pin to remove offset
 	ADMUX = (ADMUX & 0xF8) | pinNumber; // clears the bottom 3 bits before ORing
