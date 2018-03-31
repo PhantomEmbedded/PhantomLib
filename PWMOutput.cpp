@@ -29,7 +29,7 @@ PWMOutput::~PWMOutput()
 	*out &= ~bit;	// Output to low
 }
 
-inline void PWMOutput::set(uint8_t value)
+void PWMOutput::set(uint8_t value)
 {
 	// Set OCR
 	*pin->getTimer() = value;

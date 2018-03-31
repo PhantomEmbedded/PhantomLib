@@ -1,7 +1,7 @@
 #ifndef BOARD_ARDUINO_UNO_H
 #define BOARD_ARDUINO_UNO_H
 
-#include <BoardBase.h>
+#include <Boards/BoardBase.h>
 
 namespace Phantom
 {
