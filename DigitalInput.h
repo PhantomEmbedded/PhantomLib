@@ -13,7 +13,7 @@ namespace Phantom
 		DigitalInput(Pin *pin, bool pullup);
 		~DigitalInput();
 
-		inline bool get();
+		bool get();
 	private:
 		Pin *pin;
 
