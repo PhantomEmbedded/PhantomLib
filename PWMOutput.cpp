@@ -4,12 +4,10 @@ using namespace Phantom;
 
 PWMOutput::PWMOutput(Pin *pin): pin(pin)
 {
-	// Set pin as output
 	auto bit = pin->getBitMask();
 	auto mode = pin->getModeRegister();
 	*mode |= bit;
 
-	// TEMPORARY (REMOVE ASAP)
 	TCCR0A = 0b10100001;
 	TCCR0B = 0b00000001;
 	TCCR1A = 0b10100001;
@@ -25,12 +23,11 @@ PWMOutput::~PWMOutput()
 	auto out = pin->getOutputRegister();
 	auto mode = pin->getModeRegister();
 
-	*mode &= ~bit;	// Mode to input
-	*out &= ~bit;	// Output to low
+	*mode &= ~bit;
+	*out &= ~bit;
 }
 
 void PWMOutput::set(float value)
 {
-	// Set OCR
 	*pin->getTimer() = value * 255;
 }
