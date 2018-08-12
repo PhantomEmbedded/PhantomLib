@@ -17,7 +17,7 @@ uno.upload.maximum_size=32256
 uno.upload.maximum_data_size=2048
 uno.upload.speed=115200
 
-uno.build.mcu=atmks_base328p
+uno.build.mcu=atmega328p
 uno.build.f_cpu=16000000L
 uno.build.board=AVR_UNO
 uno.build.core=Phantom:phantom
@@ -46,7 +46,7 @@ mks_base.upload.protocol=wiring
 mks_base.upload.maximum_size=253952
 mks_base.upload.speed=115200
 
-mks_base.build.mcu=atmks_base2560
+mks_base.build.mcu=atmega2560
 mks_base.build.f_cpu=16000000L
 mks_base.build.board=AVR_MKS_BASE
 mks_base.build.core=Phantom:phantom
