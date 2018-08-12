@@ -12,7 +12,9 @@ namespace GPIO
 		volatile uint8_t* output_register;
 	} Port;
 
-	const Port B = {&PINB,&DDRB,&PORTB};
+	const Port B = {&PINB, &DDRB, &PORTB};
+	const Port C = {&PINC, &DDRC, &PORTC};
+	const Port D = {&PIND, &DDRD, &PORTD};
 }
 
 #endif
