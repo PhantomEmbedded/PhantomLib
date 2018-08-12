@@ -1,44 +1,31 @@
-#include <DigitalOutput.h>
+#include "DigitalOutput.h"
 
-using namespace Phantom;
-
-DigitalOutput::DigitalOutput(Pin *pin): pin(pin)
+DigitalOutput::DigitalOutput(GPIO::Port port, uint8_t pin):
+	port(port),
+	pin(pin),
+	bitmask(1<<pin)
 {
-	// Set pin as output
-	auto bit = pin->getBitMask();
-	auto mode = pin->getModeRegister();
-	*mode |= bit;
+
+	initialize();
 }
 
-DigitalOutput::~DigitalOutput()
+void DigitalOutput::initialize()
 {
-	// The order of these events ensures that the output is driven from
-	// high -> low, rather than high -> internal pullup -> low.
-	
-	// Drive output low
-	set(false);
-
-	// Set mode to input
-	auto bit = pin->getBitMask();
-	auto mode = pin->getModeRegister();
-	*mode &= ~bit;
+	*port.mode_register |= bitmask;
 }
 
-void DigitalOutput::set(bool state)
+void DigitalOutput::set(State state)
 {
-	// The compiler will optomise these.
-	auto bit = pin->getBitMask();
-	auto out = pin->getOutputRegister();
-
-	if (state)
-		*out |= bit; // high
+	if (state == High)
+		*port.output_register |= bitmask;
 	else
-		*out &= ~bit; // low
+		*port.output_register &= ~bitmask;
 }
 
-void DigitalOutput::toggle()
-{
-	auto bit = pin->getBitMask();
-	auto out = pin->getOutputRegister();
-	*out ^= bit; // Toggle state
+void DigitalOutput::set(bool state) {
+	set((State)state);
+}
+
+void DigitalOutput::toggle() {
+	*port.input_register |= bitmask;
 }

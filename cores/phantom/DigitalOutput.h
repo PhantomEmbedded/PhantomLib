@@ -1,25 +1,28 @@
 #ifndef DIGITAL_OUTPUT_H
 #define DIGITAL_OUTPUT_H
 
-#include <avr/pgmspace.h>
-#include <Pin.h>
+#include <GPIO.h>
 
-namespace Phantom
+class DigitalOutput
 {
-	class DigitalOutput
-	{
-	public:
-		DigitalOutput(Pin *pin);
-		~DigitalOutput();
-
-		void set(bool state);
-
-		void toggle();
-
-	private:
-		Pin *pin;
-		
+public:
+	enum State {
+		High = true,
+		Low = false
 	};
-}
 
-#endif /* END DIGITAL_OUTPUT_H */
+	DigitalOutput(GPIO::Port port, uint8_t pin);
+
+	void initialize();
+
+	void set(State state);
+	void set(bool state);
+	void toggle();
+
+private:
+	const GPIO::Port port;
+	const uint8_t pin;
+	const uint8_t bitmask;
+};
+
+#endif
