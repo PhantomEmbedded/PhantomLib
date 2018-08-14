@@ -18,7 +18,8 @@ namespace Timer
 		{
 			struct
 			{
-				uint8_t WGMn0 	: 1,
+				volatile uint8_t
+						WGMn0 	: 1,
 						WGMn1 	: 1,
 						unused 	: 2,
 						COMnB0	: 1,
@@ -32,7 +33,8 @@ namespace Timer
 		{
 			struct
 			{
-				uint8_t CSn 	: 3,
+				volatile uint8_t
+						CSn 	: 3,
 						WGMn2 	: 1,
 						unused 	: 2,
 						FOCnB	: 1,
@@ -44,7 +46,8 @@ namespace Timer
 		{
 			struct
 			{
-				uint8_t TOIE 	: 1,
+				volatile uint8_t
+						TOIE 	: 1,
 						OCIEA 	: 1,
 						OCIEB 	: 1;
 			};
@@ -54,7 +57,8 @@ namespace Timer
 		{
 			struct
 			{
-				uint8_t PSRSYNC : 1,
+				volatile uint8_t
+						PSRSYNC : 1,
 						RSRASY	: 1,
 						unused	: 5,
 						TSM		: 1;
@@ -68,7 +72,8 @@ namespace Timer
 		{
 			struct
 			{
-				uint8_t TOV 	: 1,
+				volatile uint8_t
+						TOV 	: 1,
 						OCFA 	: 1,
 						OCFB	: 1;
 			};
