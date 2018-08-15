@@ -2,21 +2,22 @@
 #define GPIO_H
 
 #include <avr/io.h>
+#include <avr/pgmspace.h>
 #include <GPIOBase.h>
 
 namespace GPIO
 {
-	const Port A = {&PINA,&DDRA,&PORTA};
-	const Port B = {&PINB,&DDRB,&PORTB};
-	const Port C = {&PINC,&DDRC,&PORTC};
-	const Port D = {&PIND,&DDRD,&PORTD};
-	const Port E = {&PINE,&DDRE,&PORTE};
-	const Port F = {&PINF,&DDRF,&PORTF};
-	const Port G = {&PING,&DDRG,&PORTG};
-	const Port H = {&PINH,&DDRH,&PORTH};
-	const Port J = {&PINJ,&DDRJ,&PORTJ};
-	const Port K = {&PINK,&DDRK,&PORTK};
-	const Port L = {&PINL,&DDRL,&PORTL};
+	const PROGMEM Port A = {&PINA,&DDRA,&PORTA};
+	const PROGMEM Port B = {&PINB,&DDRB,&PORTB};
+	const PROGMEM Port C = {&PINC,&DDRC,&PORTC};
+	const PROGMEM Port D = {&PIND,&DDRD,&PORTD};
+	const PROGMEM Port E = {&PINE,&DDRE,&PORTE};
+	const PROGMEM Port F = {&PINF,&DDRF,&PORTF};
+	const PROGMEM Port G = {&PING,&DDRG,&PORTG};
+	const PROGMEM Port H = {&PINH,&DDRH,&PORTH};
+	const PROGMEM Port J = {&PINJ,&DDRJ,&PORTJ};
+	const PROGMEM Port K = {&PINK,&DDRK,&PORTK};
+	const PROGMEM Port L = {&PINL,&DDRL,&PORTL};
 }
 
 #endif
