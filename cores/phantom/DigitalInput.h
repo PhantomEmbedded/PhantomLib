@@ -7,12 +7,15 @@ class DigitalInput
 {
 public:
 	DigitalInput(GPIO::Port port, uint8_t pin);
+	DigitalInput(GPIO::PortPin port_pin);
 
-	void set_pullup(bool state);
+	void set_pullup(bool state) const;
 
-	bool get();
+	bool get() const;
 
 private:
+	void initialize() const;
+
 	const GPIO::Port port;
 	const uint8_t bitmask;
 };
