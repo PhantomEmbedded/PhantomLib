@@ -1,6 +1,30 @@
 #include <Timer.h>
 #include <avr/io.h>
 #include <avr/pgmspace.h>
+#include "GPIO.h"
 
-const PROGMEM Timer::TimerCounter8BitWithPWM TC0 = {&TCCR0A, &TCCR0B, &TIMSK0, &AVR_GTCCR, &TCNT0, &OCR0A, &OCR0B, &TIFR0};
-const PROGMEM Timer::TimerCounter8BitWithPWM TC1 = {&TCCR1A, &TCCR1B, &TCCR1C, &TCNT1L, &TCNT1H, &ICR1L, &ICR1H, &OCR1AL, &OCR1AH, &OCR1BL, &OCR1BH, &TIMSK1, &TIFR1};
+volatile uint8_t * output_compare = &OCR0A;
+
+Timer::TimerCounter8BitWithPWM TC0 =
+{
+	.output				= {{GPIO::D, 6}, {GPIO::D, 5}},
+	.control 			= {&TCCR0A, &TCCR0B},
+	.interrupt_mask 	= &TIMSK0,
+	.general_control 	= &AVR_GTCCR,
+	.value 				= &TCNT0,
+	.output_compare 	= {&OCR0A, &OCR0B},
+	.interrupt_flag 	= &TIFR0
+};
+Timer::TimerCounter16BitWithPWM TC1 =
+{
+	.control 		= {&TCCR1A, &TCCR1B, &TCCR1C},
+	.value 			= {&TCNT1L, &TCNT1H},
+	.input_capture 	= {&ICR1L, &ICR1H},
+	.output_compare =
+	{
+		.A = {&OCR1AL, &OCR1AH},
+		.B = {&OCR1BL, &OCR1BH}
+	},
+	.interrupt_mask = &TIMSK1,
+	.interrupt_flag = &TIFR1
+};
