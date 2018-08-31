@@ -51,7 +51,7 @@ public:
 
 	void transmit(uint8_t data);
 
-	void receive();
+	uint8_t receive();
 	void peek();
 
 private:

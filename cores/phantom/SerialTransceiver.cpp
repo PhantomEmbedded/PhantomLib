@@ -85,6 +85,13 @@ void SerialTransceiver::transmit(uint8_t data)
 	*transceiver.data_register = data;
 }
 
+uint8_t SerialTransceiver::receive()
+{
+	while (!(*transceiver.control_and_satus_register.A & (1<<RXC0))); // wait for data
+
+	return *transceiver.data_register;
+}
+
 void SerialTransceiver::set_operating_mode(OperatingMode new_mode)
 {
 	mode = new_mode;
