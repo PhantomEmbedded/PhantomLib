@@ -80,16 +80,26 @@ void SerialTransceiver::set_data_bits(DataBits bits)
 
 void SerialTransceiver::transmit(uint8_t data)
 {
-	while ( !( *transceiver.control_and_satus_register.A & (1<<UDRE0))); // wait for empty transmit buffer
+	while (!transmit_ready()); // wait for empty transmit buffer
 
 	*transceiver.data_register = data;
 }
 
+bool SerialTransceiver::transmit_ready()
+{
+	return *transceiver.control_and_satus_register.A & (1<<UDRE0);
+}
+
 uint8_t SerialTransceiver::receive()
 {
-	while (!(*transceiver.control_and_satus_register.A & (1<<RXC0))); // wait for data
+	while (!receive_ready()); // wait for data
 
 	return *transceiver.data_register;
+}
+
+bool SerialTransceiver::receive_ready()
+{
+	return *transceiver.control_and_satus_register.A & (1<<RXC0);
 }
 
 void SerialTransceiver::set_operating_mode(OperatingMode new_mode)

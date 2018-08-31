@@ -48,13 +48,16 @@ public:
 	void set_data_bits(DataBits bits);
 
 	void set_operating_mode(OperatingMode new_mode);
+	bool transmit_ready();
 
 	void transmit(uint8_t data);
 
 	uint8_t receive();
+	bool receive_ready();
 	void peek();
 
 private:
+
 	const Serial::Transceiver transceiver;
 	Serial::Rate rate;
 	OperatingMode mode;
