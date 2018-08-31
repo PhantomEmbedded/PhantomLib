@@ -13,8 +13,8 @@ namespace GPIO
 	typedef struct
 	{
 		Port port;
-		uint8_t pin : 3;
-	} PortPin;
+		uint8_t bit : 3;
+	} Pin;
 }
 
 #endif

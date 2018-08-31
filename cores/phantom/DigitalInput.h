@@ -6,8 +6,8 @@
 class DigitalInput
 {
 public:
-	DigitalInput(GPIO::Port port, uint8_t pin);
-	DigitalInput(GPIO::PortPin port_pin);
+	DigitalInput(GPIO::Port port, uint8_t bit);
+	DigitalInput(GPIO::Pin pin);
 
 	void set_pullup(bool state) const;
 

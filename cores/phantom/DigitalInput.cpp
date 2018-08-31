@@ -1,15 +1,15 @@
 #include "DigitalInput.h"
 
-DigitalInput::DigitalInput(GPIO::Port port, uint8_t pin):
+DigitalInput::DigitalInput(GPIO::Port port, uint8_t bit):
 	port(port),
-	bitmask(1<<pin)
+	bitmask(1<<bit)
 {
 	initialize();
 }
 
-DigitalInput::DigitalInput(GPIO::PortPin port_pin):
-	port(port_pin.port),
-	bitmask(1<<port_pin.pin)
+DigitalInput::DigitalInput(GPIO::Pin pin):
+	port(pin.port),
+	bitmask(1<<pin.bit)
 {
 	initialize();
 }

@@ -1,15 +1,15 @@
 #include "DigitalOutput.h"
 
-DigitalOutput::DigitalOutput(GPIO::Port port, uint8_t pin):
+DigitalOutput::DigitalOutput(GPIO::Port port, uint8_t bit):
 	port(port),
-	bitmask(1<<pin)
+	bitmask(1<<bit)
 {
 	initialize();
 }
 
-DigitalOutput::DigitalOutput(GPIO::PortPin port_pin):
-	port(port_pin.port),
-	bitmask(1<<port_pin.pin)
+DigitalOutput::DigitalOutput(GPIO::Pin pin):
+	port(pin.port),
+	bitmask(1<<pin.bit)
 {
 	initialize();
 }

@@ -6,8 +6,8 @@
 class DigitalOutput
 {
 public:
-	DigitalOutput(GPIO::Port port, uint8_t pin);
-	DigitalOutput(GPIO::PortPin port_pin);
+	DigitalOutput(GPIO::Port port, uint8_t bit);
+	DigitalOutput(GPIO::Pin pin);
 
 	void set(bool state) const;
 	void toggle() const;
