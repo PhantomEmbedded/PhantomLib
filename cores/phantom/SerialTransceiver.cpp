@@ -29,12 +29,52 @@ void SerialTransceiver::initialize()
 		*transceiver.control_and_satus_register.A &= ~(1 << U2X0);
 	}
 
+	set_baud_rate(baud_setting);
+
+	set_tx_enabled(true);
+	set_rx_enabled(true);
+
+	set_stop_bits(StopBits::Bit2);
+	set_data_bits(DataBits::Bit8);
+}
+
+void SerialTransceiver::set_baud_rate(uint16_t baud_setting)
+{
 	*transceiver.baud_rate_register.L = (uint8_t)(baud_setting);
 	*transceiver.baud_rate_register.H = (uint8_t)(baud_setting >> 8);
+}
 
-	*transceiver.control_and_satus_register.B = (1<<RXEN0) | (1<<TXEN0); // rx/tx eanble
+void SerialTransceiver::set_tx_enabled(bool state)
+{
+	if (state)
+		*transceiver.control_and_satus_register.B |= (1<<TXEN0);
+	else
+		*transceiver.control_and_satus_register.B &= ~(1<<TXEN0);
+}
 
-	*transceiver.control_and_satus_register.C = (1<<USBS0) | (3<<UCSZ00); // 8 data, 2 stop
+void SerialTransceiver::set_rx_enabled(bool state)
+{
+	if (state)
+		*transceiver.control_and_satus_register.B |= (1<<RXEN0);
+	else
+		*transceiver.control_and_satus_register.B |= ~(1<<RXEN0);
+}
+
+void SerialTransceiver::set_stop_bits(bool state)
+{
+	if (state)
+		*transceiver.control_and_satus_register.C |= (1<<USBS0);
+	else
+		*transceiver.control_and_satus_register.C &= ~(1<<USBS0);
+}
+
+void SerialTransceiver::set_data_bits(DataBits bits)
+{
+	*transceiver.control_and_satus_register.C &= ~(3<<UCSZ00);
+	*transceiver.control_and_satus_register.C |= (3<<UCSZ00) & (bits<<UCSZ00);
+
+	*transceiver.control_and_satus_register.B &= ~(0b1<<UCSZ02);
+	*transceiver.control_and_satus_register.C |= (0b1<<UCSZ02) & (bits<<UCSZ02);
 }
 
 void SerialTransceiver::transmit(uint8_t data)
