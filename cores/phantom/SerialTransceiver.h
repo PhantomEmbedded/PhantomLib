@@ -40,6 +40,13 @@ public:
 
 	void initialize();
 
+	void set_double_speed(bool sate);
+	void set_baud_rate(uint16_t baud_setting);
+	void set_tx_enabled(bool state);
+	void set_rx_enabled(bool state);
+	void set_stop_bits(bool state);
+	void set_data_bits(DataBits bits);
+
 	void set_operating_mode(OperatingMode new_mode);
 
 	void transmit(uint8_t data);
@@ -48,13 +55,6 @@ public:
 	void peek();
 
 private:
-	void set_double_speed(bool sate);
-	void set_baud_rate(uint16_t baud_setting);
-	void set_tx_enabled(bool state);
-	void set_rx_enabled(bool state);
-	void set_stop_bits(bool state);
-	void set_data_bits(DataBits bits);
-
 	const Serial::Transceiver transceiver;
 	Serial::Rate rate;
 	OperatingMode mode;
