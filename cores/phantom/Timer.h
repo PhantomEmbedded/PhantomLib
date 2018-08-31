@@ -17,8 +17,8 @@ namespace Timer
 	{
 		struct
 		{
-			GPIO::PortPin A;
-			GPIO::PortPin B;
+			GPIO::Pin A;
+			GPIO::Pin B;
 		} output;
 		struct
 		{
