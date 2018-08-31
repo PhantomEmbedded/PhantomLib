@@ -102,6 +102,15 @@ bool SerialTransceiver::receive_ready()
 	return *transceiver.control_and_satus_register.A & (1<<RXC0);
 }
 
+void SerialTransceiver::flush_receive_buffer()
+{
+	uint8_t dummy = 0;
+	while (receive_ready())
+	{
+		dummy = *transceiver.data_register;
+	}
+}
+
 void SerialTransceiver::set_operating_mode(OperatingMode new_mode)
 {
 	mode = new_mode;

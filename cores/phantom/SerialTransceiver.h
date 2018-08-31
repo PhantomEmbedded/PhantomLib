@@ -54,6 +54,7 @@ public:
 
 	uint8_t receive();
 	bool receive_ready();
+	void flush_receive_buffer();
 	void peek();
 
 private:
