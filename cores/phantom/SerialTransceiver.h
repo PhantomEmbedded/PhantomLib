@@ -57,7 +57,6 @@ public:
 	void peek();
 
 private:
-
 	const Serial::Transceiver transceiver;
 	Serial::Rate rate;
 	OperatingMode mode;
