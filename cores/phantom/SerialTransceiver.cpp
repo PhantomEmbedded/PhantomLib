@@ -20,22 +20,23 @@ void SerialTransceiver::initialize()
 {
 	uint16_t baud_setting = (F_CPU / (mode * rate)) - 1;
 
-	if (mode == OperatingMode::AsyncDoubleSpeed)
-	{
-		*transceiver.control_and_satus_register.A |= (1 << U2X0);
-	}
-	else if (mode == OperatingMode::AsyncNormal)
-	{
-		*transceiver.control_and_satus_register.A &= ~(1 << U2X0);
-	}
-
 	set_baud_rate(baud_setting);
+
+	set_double_speed(mode == OperatingMode::AsyncDoubleSpeed);
 
 	set_tx_enabled(true);
 	set_rx_enabled(true);
 
 	set_stop_bits(StopBits::Bit2);
 	set_data_bits(DataBits::Bit8);
+}
+
+void SerialTransceiver::set_double_speed(bool state)
+{
+	if (state)
+		*transceiver.control_and_satus_register.A |= (1 << U2X0);
+	else
+		*transceiver.control_and_satus_register.A &= ~(1 << U2X0);
 }
 
 void SerialTransceiver::set_baud_rate(uint16_t baud_setting)

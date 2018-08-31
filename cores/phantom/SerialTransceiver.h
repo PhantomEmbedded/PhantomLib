@@ -48,6 +48,7 @@ public:
 	void peek();
 
 private:
+	void set_double_speed(bool sate);
 	void set_baud_rate(uint16_t baud_setting);
 	void set_tx_enabled(bool state);
 	void set_rx_enabled(bool state);
