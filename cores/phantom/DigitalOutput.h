@@ -15,7 +15,7 @@ public:
 private:
 	void initialize() const;
 
-	const GPIO::Port port;
+	const GPIO::Pin pin;
 	const uint8_t bitmask;
 };
 
