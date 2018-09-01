@@ -9,12 +9,12 @@ public:
 	DigitalOutput(GPIO::Port port, uint8_t bit);
 	DigitalOutput(GPIO::Pin pin);
 
+	void initialize() const;
+
 	void set(bool state) const;
 	void toggle() const;
 
 private:
-	void initialize() const;
-
 	const GPIO::Pin pin;
 	const uint8_t bitmask;
 };

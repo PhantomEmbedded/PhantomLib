@@ -14,6 +14,11 @@ DigitalOutput::DigitalOutput(GPIO::Pin pin):
 	initialize();
 }
 
+void DigitalOutput::initialize() const
+{
+	*pin.port.mode_register |= bitmask;
+}
+
 void DigitalOutput::set(bool state) const
 {
 	if (state)
@@ -25,9 +30,4 @@ void DigitalOutput::set(bool state) const
 void DigitalOutput::toggle() const
 {
 	*pin.port.input_register |= bitmask;
-}
-
-void DigitalOutput::initialize() const
-{
-	*pin.port.mode_register |= bitmask;
 }
