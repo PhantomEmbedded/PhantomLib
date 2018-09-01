@@ -14,6 +14,11 @@ DigitalInput::DigitalInput(GPIO::Pin pin):
 	initialize();
 }
 
+void DigitalInput::initialize() const
+{
+	*pin.port.mode_register &= ~bitmask;
+}
+
 void DigitalInput::set_pullup(bool setup) const
 {
 	*pin.port.output_register |= bitmask;
@@ -22,9 +27,4 @@ void DigitalInput::set_pullup(bool setup) const
 bool DigitalInput::get() const
 {
 	return *pin.port.input_register & bitmask;
-}
-
-void DigitalInput::initialize() const
-{
-	*pin.port.mode_register &= ~bitmask;
 }

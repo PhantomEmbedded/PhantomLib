@@ -9,12 +9,13 @@ public:
 	DigitalInput(GPIO::Port port, uint8_t bit);
 	DigitalInput(GPIO::Pin pin);
 
+	void initialize() const;
+
 	void set_pullup(bool state) const;
 
 	bool get() const;
 
 private:
-	void initialize() const;
 
 	const GPIO::Pin pin;
 	const uint8_t bitmask;
