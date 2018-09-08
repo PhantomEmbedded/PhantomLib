@@ -1,8 +1,12 @@
 #ifndef SERIAL_BASE_H
 #define SERIAL_BASE_H
 
+#include <avr/io.h>
+
 namespace Serial
 {
+	enum Rate : uint32_t;
+
 	typedef struct
 	{
 		volatile uint8_t * const data_register;

@@ -1,8 +1,7 @@
 #ifndef SERIAL_H
 #define SERIAL_H
 
-#include <avr/io.h>
-#include <SerialBase.h>
+#include <SerialTransceiver.h>
 
 namespace Serial
 {

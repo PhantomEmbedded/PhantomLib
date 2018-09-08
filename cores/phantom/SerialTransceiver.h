@@ -1,7 +1,7 @@
 #ifndef SERIAL_TRANSCEIVER_H
 #define SERIAL_TRANSCEIVER_H
 
-#include <Serial.h>
+#include <SerialBase.h>
 
 class SerialTransceiver
 {
