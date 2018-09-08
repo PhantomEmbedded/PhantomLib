@@ -24,6 +24,8 @@ namespace Serial
 	};
 
 	const Device A = {&UDR0, {&UCSR0A, &UCSR0B, &UCSR0C}, {&UBRR0L, &UBRR0H}};
+
+	SerialDevice main(A, 57600);
 }
 
 #endif
