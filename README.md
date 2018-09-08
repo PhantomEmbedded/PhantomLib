@@ -1,7 +1,20 @@
 # Phantom AVR Core
 The aim is to improve the Arduino environment through the use of modern C++ techniques.
 
-# Blink
+## Installation
+
+HTTP
+```bash
+https://github.com/PhantomEmbedded/avr-core.git ~/Arduino/hardware/Phantom/avr
+```
+SSH
+```bash
+git clone git@github.com:PhantomEmbedded/avr-core.git ~/Arduino/hardware/Phantom/avr
+```
+
+You will need to restart yout Arduino IDE.
+
+## Blink
 
 ```c++
 #include <DigitalOutput.h>
