@@ -21,7 +21,7 @@ namespace Serial
 			volatile uint8_t * const L;
 			volatile uint8_t * const H;
 		} baud_rate_register;
-	} Transceiver;
+	} Device;
 }
 
 #endif

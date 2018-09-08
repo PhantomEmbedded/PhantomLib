@@ -1,7 +1,7 @@
 #ifndef SERIAL_H
 #define SERIAL_H
 
-#include <SerialTransceiver.h>
+#include <SerialDevice.h>
 
 namespace Serial
 {
@@ -23,7 +23,7 @@ namespace Serial
 		bps1000000 = 1000000
 	};
 
-	const Transceiver A = {&UDR0, {&UCSR0A, &UCSR0B, &UCSR0C}, {&UBRR0L, &UBRR0H}};
+	const Device A = {&UDR0, {&UCSR0A, &UCSR0B, &UCSR0C}, {&UBRR0L, &UBRR0H}};
 }
 
 #endif

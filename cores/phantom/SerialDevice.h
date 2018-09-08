@@ -3,7 +3,7 @@
 
 #include <SerialBase.h>
 
-class SerialTransceiver
+class SerialDevice
 {
 public:
 	enum OperatingMode: uint8_t
@@ -35,8 +35,8 @@ public:
 		Bit9 = 0b111
 	};
 
-	SerialTransceiver(Serial::Transceiver transceiver, Serial::Rate rate);
-	SerialTransceiver(Serial::Transceiver transceiver, Serial::Rate rate, OperatingMode mode);
+	SerialDevice(Serial::Device device, Serial::Rate rate);
+	SerialDevice(Serial::Device device, Serial::Rate rate, OperatingMode mode);
 
 	void initialize();
 
@@ -58,7 +58,7 @@ public:
 	void peek();
 
 private:
-	const Serial::Transceiver transceiver;
+	const Serial::Device device;
 	Serial::Rate rate;
 	OperatingMode mode;
 };
