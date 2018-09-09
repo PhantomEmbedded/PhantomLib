@@ -50,9 +50,9 @@ public:
 	void set_operating_mode(OperatingMode new_mode);
 	bool transmit_ready();
 
-	void transmit(uint8_t data);
+	void write(uint8_t data);
 
-	uint8_t receive();
+	uint8_t read();
 	bool receive_ready();
 	void flush_receive_buffer();
 	void peek();

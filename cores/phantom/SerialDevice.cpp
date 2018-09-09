@@ -78,7 +78,7 @@ void SerialDevice::set_data_bits(DataBits bits)
 	*device.control_and_satus_register.C |= (0b1<<UCSZ02) & (bits<<UCSZ02);
 }
 
-void SerialDevice::transmit(uint8_t data)
+void SerialDevice::write(uint8_t data)
 {
 	while (!transmit_ready()); // wait for empty transmit buffer
 
@@ -90,7 +90,7 @@ bool SerialDevice::transmit_ready()
 	return *device.control_and_satus_register.A & (1<<UDRE0);
 }
 
-uint8_t SerialDevice::receive()
+uint8_t SerialDevice::read()
 {
 	while (!receive_ready()); // wait for data
 
@@ -115,4 +115,9 @@ void SerialDevice::set_operating_mode(OperatingMode new_mode)
 {
 	mode = new_mode;
 	initialize();
+}
+
+void SerialDevice::interrupt_receive_callback()
+{
+	buffer.push_back((uint8_t)*device.data_register);
 }
