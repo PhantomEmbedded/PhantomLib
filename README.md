@@ -5,11 +5,11 @@ The aim is to improve the Arduino environment through the use of modern C++ tech
 
 HTTP
 ```bash
-git clone https://github.com/PhantomEmbedded/avr-core.git ~/Arduino/hardware/Phantom/avr
+git clone --recurse-submodules https://github.com/PhantomEmbedded/avr-core.git ~/Arduino/hardware/Phantom/avr
 ```
 SSH
 ```bash
-git clone git@github.com:PhantomEmbedded/avr-core.git ~/Arduino/hardware/Phantom/avr
+git clone --recurse-submodules git@github.com:PhantomEmbedded/avr-core.git ~/Arduino/hardware/Phantom/avr
 ```
 
 You will need to restart yout Arduino IDE.
