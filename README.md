@@ -5,7 +5,7 @@ The aim is to improve the Arduino environment through the use of modern C++ tech
 
 HTTP
 ```bash
-https://github.com/PhantomEmbedded/avr-core.git ~/Arduino/hardware/Phantom/avr
+git clone https://github.com/PhantomEmbedded/avr-core.git ~/Arduino/hardware/Phantom/avr
 ```
 SSH
 ```bash
