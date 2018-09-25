@@ -56,6 +56,7 @@ mks_base.build.variant=mks_base
 
 mega2560.name=Arduino Mega 2560 or Mega ADK
 
+mks_base.upload.tool=avrdude
 mega2560.upload.protocol=wiring
 mega2560.upload.maximum_size=258048
 mega2560.upload.speed=115200
