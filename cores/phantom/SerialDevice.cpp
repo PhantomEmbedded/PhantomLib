@@ -116,8 +116,3 @@ void SerialDevice::set_operating_mode(OperatingMode new_mode)
 	mode = new_mode;
 	initialize();
 }
-
-void SerialDevice::interrupt_receive_callback()
-{
-	buffer.push_back((uint8_t)*device.data_register);
-}
