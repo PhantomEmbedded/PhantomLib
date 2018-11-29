@@ -1,3 +1,6 @@
+#ifndef TIMERS_H
+#define TIMERS_H
+
 #include <Timer.h>
 #include <avr/io.h>
 #include <avr/pgmspace.h>
@@ -28,3 +31,5 @@ Timer::TimerCounter16BitWithPWM TC1 =
 	.interrupt_mask = &TIMSK1,
 	.interrupt_flag = &TIFR1
 };
+
+#endif
