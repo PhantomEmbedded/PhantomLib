@@ -1,6 +1,6 @@
 #include "PWMOutput.h"
 
-PWMOutput8Bit::PWMOutput8Bit(Timer::TimerCounter8BitWithPWM timer, Output output):
+PWMOutput::PWMOutput(Timer::TimerCounter8BitWithPWM timer, Output output):
 	timer(timer),
 	output(output)
 {
@@ -13,7 +13,7 @@ PWMOutput8Bit::PWMOutput8Bit(Timer::TimerCounter8BitWithPWM timer, Output output
 	*timer.control.B |= (1<<CS00);
 }
 
-void PWMOutput8Bit::set(uint8_t value)
+void PWMOutput::set(uint8_t value)
 {
 	switch (output)
 	{
