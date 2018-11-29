@@ -6,8 +6,6 @@
 #include <avr/pgmspace.h>
 #include "GPIO.h"
 
-volatile uint8_t * output_compare = &OCR0A;
-
 Timer::TimerCounter8BitWithPWM TC0 =
 {
 	.output				= {{GPIO::D, 6}, {GPIO::D, 5}},
