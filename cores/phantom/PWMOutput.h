@@ -12,7 +12,7 @@ public:
 		B
 	};
 	
-	PWMOutput(Timer::TimerCounter8BitWithPWM timer, Output output);
+	PWMOutput(TimerCounter8BitWithPWM timer, Output output);
 	
 	void set(uint8_t value);
 
@@ -27,7 +27,7 @@ private:
 
 	Type type;
 
-	Timer::TimerCounter8BitWithPWM timer;
+	TimerCounter8BitWithPWM timer;
 	Output output;
 };
 

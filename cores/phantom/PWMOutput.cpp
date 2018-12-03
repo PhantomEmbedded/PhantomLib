@@ -1,6 +1,6 @@
 #include "PWMOutput.h"
 
-PWMOutput::PWMOutput(Timer::TimerCounter8BitWithPWM timer, Output output):
+PWMOutput::PWMOutput(TimerCounter8BitWithPWM timer, Output output):
 	timer(timer),
 	output(output)
 {

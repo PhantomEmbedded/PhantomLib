@@ -6,7 +6,7 @@
 #include <avr/pgmspace.h>
 #include "GPIO.h"
 
-const Timer::TimerCounter8BitWithPWM TC0 =
+const TimerCounter8BitWithPWM TC0 =
 {
 	.output				= {{GPIO::D, 6}, {GPIO::D, 5}},
 	.control 			= {&TCCR0A, &TCCR0B},
@@ -17,7 +17,7 @@ const Timer::TimerCounter8BitWithPWM TC0 =
 	.interrupt_flag 	= &TIFR0
 };
 
-const Timer::TimerCounter16BitWithPWM TC1 =
+const TimerCounter16BitWithPWM TC1 =
 {
 	.control 		= {&TCCR1A, &TCCR1B, &TCCR1C},
 	.value 			= {&TCNT1L, &TCNT1H},
