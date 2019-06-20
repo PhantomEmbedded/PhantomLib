@@ -37,7 +37,7 @@ void A4982::set_direction(Direction direction)
 void A4982::step()
 {
 	step_output->set(true);
-	_delay_us(100);
+	_delay_us(150);
 	step_output->set(false);
-	_delay_us(100);
+	_delay_us(150);
 }
