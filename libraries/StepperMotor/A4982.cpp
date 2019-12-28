@@ -20,8 +20,8 @@ A4982::A4982(
 
 void A4982::set_microstep(MicrostepResolution resolution)
 {
-	microstep_1_output->set(resolution & 0b10);
-	microstep_2_output->set(resolution & 0b01);
+	microstep_1_output->set(resolution & 0b01);
+	microstep_2_output->set(resolution & 0b10);
 }
 
 void A4982::set_enabled(bool enabled)
@@ -36,8 +36,8 @@ void A4982::set_direction(Direction direction)
 
 void A4982::step()
 {
-	step_output->set(true);
-	_delay_us(150);
 	step_output->set(false);
-	_delay_us(150);
+	_delay_us(100);
+	step_output->set(true);
+	_delay_us(100);
 }

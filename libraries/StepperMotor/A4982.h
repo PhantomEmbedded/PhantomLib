@@ -3,23 +3,11 @@
 
 #include <util/delay.h>
 #include <DigitalOutput.h>
+#include "StepperDriver.h"
 
-class A4982
+class A4982: public StepperDriver
 {
 public:
-	enum MicrostepResolution
-	{
-		FullStep		= 0b00,
-		HalfStep		= 0b10,
-		QuarterStep		= 0b01,
-		SixteenthStep	= 0b11
-	};
-
-	enum Direction {
-		Forward = 0,
-		Reverse = 1
-	};
-
 	A4982(
 		DigitalOutput * step_output,
 		DigitalOutput * direction_output,
@@ -35,9 +23,8 @@ public:
 	void set_direction(Direction direction);
 	void step();
 
-	DigitalOutput * step_output;
-
 private:
+	DigitalOutput * step_output;
 	DigitalOutput * direction_output;
 	DigitalOutput * microstep_1_output;
 	DigitalOutput * microstep_2_output;
