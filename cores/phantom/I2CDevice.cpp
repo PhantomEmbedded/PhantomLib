@@ -27,21 +27,21 @@ void I2CDevice::write(uint8_t data)
 	while(!start_condition_sent());
 
 	if (!succsessful_start_condition_transmition())
-		/* todo: error handler */;
+		{/* todo: error handler */}
 
 	set_slave_write_address(slave_address);
 
 	while(!address_packet_transmitted());
 
 	if (!succsessful_address_packet_transmition())
-		/* todo: error handler */;
+		{/* todo: error handler */}
 
 	transmit_data(data);
 
 	while(!data_transmitted());
 
 	if (!succsessful_data_transmition())
-		/* todo: error handler */;
+		{/* todo: error handler */}
 
 	transmit_stop();
 }
